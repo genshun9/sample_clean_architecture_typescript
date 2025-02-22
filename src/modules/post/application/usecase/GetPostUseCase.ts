@@ -1,12 +1,12 @@
-import {PostRepository} from "../../domain/repository/PostRepository";
-import {UserRepository} from "../../../user/domain/repository/UserRepository";
+import {IPostRepository} from "../../domain/repository/PostRepository";
+import {IUserRepository} from "../../../user/domain/repository/UserRepository";
 import {PostResponse} from "../dto/PostResponse";
 import {PostID} from "../../domain/valueObject/PostID";
 
 export class GetPostUseCase {
     constructor(
-        private postRepository: PostRepository,
-        private userRepository: UserRepository
+        private postRepository: IPostRepository,
+        private userRepository: IUserRepository
     ) {}
 
     async execute(postId: string): Promise<PostResponse> {

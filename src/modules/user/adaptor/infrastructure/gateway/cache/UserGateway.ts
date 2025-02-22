@@ -1,9 +1,9 @@
-import {UserRepository} from "../../../../domain/repository/UserRepository";
+import {IUserRepository} from "../../../../domain/repository/UserRepository";
 import {User} from "../../../../domain/entity/User";
 import {UserID} from "../../../../domain/valueObject/UserID";
 import {Email} from "../../../../domain/valueObject/Email";
 
-export class UserGateway implements UserRepository {
+export class UserGateway implements IUserRepository {
     // 適当な実装
     private cache: any;
     constructor() {

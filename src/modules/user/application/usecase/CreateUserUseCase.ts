@@ -1,11 +1,11 @@
-import {UserRepository} from "../../domain/repository/UserRepository";
+import {IUserRepository} from "../../domain/repository/UserRepository";
 import {UserFactory} from "../../domain/factory/UserFactory";
 import {User} from "../../domain/entity/User";
 import {Email} from "../../domain/valueObject/Email";
 
 export class CreateUserUseCase {
     constructor(
-        private userRepository: UserRepository,
+        private userRepository: IUserRepository,
         private userFactory: UserFactory
     ) {}
 
