@@ -3,7 +3,7 @@ import {User} from "../../../../domain/entity/User";
 import {UserID} from "../../../../domain/valueObject/UserID";
 import {Email} from "../../../../domain/valueObject/Email";
 
-export class UserGateway implements IUserRepository {
+export class UserGateway implements IUserRepository<User> {
     // 適当な実装
     private cache: any;
     constructor() {
