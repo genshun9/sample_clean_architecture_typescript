@@ -1,15 +1,18 @@
 import {UserID} from "../valueObject/UserID";
 import {UserName} from "../valueObject/UserName";
 import {Email} from "../valueObject/Email";
+import {Entity} from "../../../../shared/domain/Entity";
 
-export class User {
+export class User extends Entity<UserID> {
     constructor(
-        private readonly id: UserID,
+        readonly id: UserID, //privateにするとエラーが発生する。なんでだっけ？
         private name: UserName,
         private email: Email,
         private readonly createdAt: Date,
         private updatedAt: Date
-    ) {}
+    ) {
+        super(id);
+    }
 
     getID(): UserID {
         return this.id;

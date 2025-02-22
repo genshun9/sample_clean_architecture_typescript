@@ -1,12 +1,14 @@
-export class Email {
-    private readonly value: string;
+import {ValueObject} from "../../../../shared/domain/ValueObject";
 
+export class Email extends ValueObject<string>{
     constructor(value: string) {
-        // メールアドレスのバリデーション
+        super(value);
+    }
+
+    protected validate(value: string): void {
         if (!this.isValidEmail(value)) {
             throw new Error('Invalid email format');
         }
-        this.value = value;
     }
 
     private isValidEmail(email: string): boolean {

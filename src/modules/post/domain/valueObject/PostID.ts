@@ -1,8 +1,12 @@
-export class PostID {
-    private readonly value: string;
+import {EntityID} from "../../../../shared/domain/EntityID";
 
+export class PostID extends EntityID<string> {
     constructor(value: string) {
-        this.value = value;
+        super(value);
+    }
+
+    static create(value: string): PostID {
+        return new PostID(value);
     }
 
     getValue(): string {

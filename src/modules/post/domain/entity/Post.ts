@@ -1,14 +1,17 @@
 import {PostID} from "../valueObject/PostID";
 import {Message} from "../valueObject/Message";
 import {UserID} from "../../../user/domain/valueObject/UserID";
+import {Entity} from "../../../../shared/domain/Entity";
 
-export class Post {
+export class Post extends Entity<PostID>{
     constructor(
-        private readonly id: PostID,
+        readonly id: PostID,
         private message: Message,
         private postedBy: UserID,
         private readonly createdAt: Date
-    ) {}
+    ) {
+        super(id);
+    }
 
     getID(): PostID {
         return this.id;
