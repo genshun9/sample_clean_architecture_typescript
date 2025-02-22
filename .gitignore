@@ -1,0 +1,9 @@
+# library
+node_modules/*
+
+# build
+dist/*
+
+# others
+.idea/
+.DS_Store
