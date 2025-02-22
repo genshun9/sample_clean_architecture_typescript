@@ -1,6 +1,6 @@
 import {PostID} from "../valueObject/PostID";
 import {Message} from "../valueObject/Message";
-import {UserID} from "../../user/valueObject/UserID";
+import {UserID} from "../../../user/domain/valueObject/UserID";
 
 export class Post {
     constructor(

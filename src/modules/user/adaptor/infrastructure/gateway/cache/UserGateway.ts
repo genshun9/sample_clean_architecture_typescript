@@ -1,7 +1,7 @@
-import {UserRepository} from "../../../../../domain/user/repository/UserRepository";
-import {User} from "../../../../../domain/user/entity/User";
-import {UserID} from "@domain/user/valueObject/UserID";
-import {Email} from "@domain/user/valueObject/Email";
+import {UserRepository} from "../../../../domain/repository/UserRepository";
+import {User} from "../../../../domain/entity/User";
+import {UserID} from "../../../../domain/valueObject/UserID";
+import {Email} from "../../../../domain/valueObject/Email";
 
 export class UserGateway implements UserRepository {
     // 適当な実装

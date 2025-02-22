@@ -1,4 +1,4 @@
-import {CreateUserUseCase} from "../../../../application/usecases/user/CreateUserUseCase";
+import {CreateUserUseCase} from "../../application/usecase/CreateUserUseCase";
 
 export class UserController {
     constructor(

@@ -1,7 +1,7 @@
-import {PostRepository} from "../../../domain/post/repository/PostRepository";
-import {UserRepository} from "../../../domain/user/repository/UserRepository";
-import {PostResponse} from "../../dto/post/PostResponse";
-import {PostID} from "../../../domain/post/valueObject/PostID";
+import {PostRepository} from "../../domain/repository/PostRepository";
+import {UserRepository} from "../../../user/domain/repository/UserRepository";
+import {PostResponse} from "../dto/PostResponse";
+import {PostID} from "../../domain/valueObject/PostID";
 
 export class GetPostUseCase {
     constructor(

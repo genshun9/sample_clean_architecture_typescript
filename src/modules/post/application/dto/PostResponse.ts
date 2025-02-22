@@ -1,5 +1,5 @@
-import {Post} from "../../../domain/post/entity/Post";
-import {UserName} from "../../../domain/user/valueObject/UserName";
+import {Post} from "../../domain/entity/Post";
+import {UserName} from "../../../user/domain/valueObject/UserName";
 
 export class PostResponse {
     constructor(

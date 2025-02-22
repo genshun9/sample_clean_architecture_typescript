@@ -1,7 +1,7 @@
-import {UserRepository} from "../../../domain/user/repository/UserRepository";
-import {UserFactory} from "../../../domain/user/factory/UserFactory";
-import {User} from "../../../domain/user/entity/User";
-import {Email} from "../../../domain/user/valueObject/Email";
+import {UserRepository} from "../../domain/repository/UserRepository";
+import {UserFactory} from "../../domain/factory/UserFactory";
+import {User} from "../../domain/entity/User";
+import {Email} from "../../domain/valueObject/Email";
 
 export class CreateUserUseCase {
     constructor(
