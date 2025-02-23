@@ -1,4 +1,4 @@
-export interface IOutputPort<Response> {
-    success(response: Response): void;
+export interface IOutputPort {
+    // success(response: T): void;
     failure(error: Error): void;
 }
