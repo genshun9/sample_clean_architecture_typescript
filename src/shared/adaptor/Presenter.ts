@@ -2,17 +2,11 @@ import {Response} from "express";
 import {IOutputPort} from "../application/OutputPort";
 
 export abstract class Presenter implements IOutputPort {
+    // Presenterがフレームワーク(express)に依存する形になるが、一番外の層なので良しとする
     constructor(protected response:Response) {}
-    // TODO: DTOにしたい
-    protected viewModel: any;
 
-    // abstract success(response: T): void;
-
-    failure(error: Error): void {
+    failure(err: Error): void {
         this.response.status(500);
-    }
-
-    getViewModel() {
-        return this.viewModel;
+        this.response.send(err);
     }
 }
