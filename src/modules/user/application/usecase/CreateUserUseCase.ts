@@ -1,28 +1,36 @@
 import {IUserRepository} from "../../domain/repository/UserRepository";
 import {UserFactory} from "../../domain/factory/UserFactory";
-import {User} from "../../domain/entity/User";
 import {Email} from "../../domain/valueObject/Email";
-import {CreateUserRequest, ICreateUserInputPort} from "../port/CreateUserInputPort";
-import {ICreateUserOutputPort} from "../port/CreateUserOutputPort";
+import {ICreateUserInputPort} from "../port/UserInputPort";
+import {UseCase} from "../../../../shared/application/UseCase";
+import {IUserOutputPort} from "../port/UserOutputPort";
+import {Result} from "../../../../shared/application/UseCaseResult";
+import {CreateUserRequest, CreateUserResponse} from "../dto";
 
-export class CreateUserUseCase implements ICreateUserInputPort {
+export class CreateUserUseCase extends UseCase<CreateUserRequest> implements ICreateUserInputPort {
     constructor(
         private readonly userRepository: IUserRepository,
         private readonly userFactory: UserFactory,
-        private readonly outputPort: ICreateUserOutputPort
-    ) {}
+        readonly outputPort: IUserOutputPort,
+    ) {
+        super(outputPort);
+    }
 
     async execute(request: CreateUserRequest): Promise<void> {
         // メールアドレスの重複チェック
         // ValueObjectを一旦ここで生成する
-        const existingUser = await this.userRepository.findByEmail(new Email(request.email));
-        if (existingUser) {
-            throw new Error('Email already exists');
+        try {
+            const existingUser = await this.userRepository.findByEmail(new Email(request.email));
+            if (existingUser) {
+                throw new Error('Email already exists');
+            }
+            // Factory経由で作成
+            const user = this.userFactory.create(request.name, request.email);
+            // 永続化
+            await this.userRepository.save(user);
+            this.outputPort.successCreateUser();
+        } catch {
+            this.outputPort.failure(new Error("error"));
         }
-        // Factory経由で作成
-        const user = this.userFactory.create(request.name, request.email);
-        // 永続化
-        await this.userRepository.save(user);
-        // return user;
     }
 }

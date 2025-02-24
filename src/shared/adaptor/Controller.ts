@@ -1,4 +1,4 @@
-import {Request, Response} from "express";
+import {Response} from "express";
 import {IInputPort} from "../application/InputPort";
 import {IOutputPort} from "../application/OutputPort";
 
@@ -10,7 +10,7 @@ export abstract class Controller<RequestDto> {
 
     protected abstract validateRequest(req: RequestDto): boolean;
 
-    // controllerとusecaseが1対1であるなら、基底クラスに実装可能なはず
+    // controllerとusecaseが1対1であるなら基底クラスに共通実装可能なはずだが、やっぱ無理だったのでやめる
     run(res: Response, req: RequestDto): void {
         const validationResult = this.validateRequest(req);
         switch(validationResult) {

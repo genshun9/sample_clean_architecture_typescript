@@ -1,3 +1,3 @@
 export interface IInputPort<Request> {
-    execute(request: Request): void;
+    execute(request: Request): Promise<void>;
 }

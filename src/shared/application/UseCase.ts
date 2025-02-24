@@ -6,7 +6,7 @@ export abstract class UseCase<Request> implements IInputPort<Request>{
         protected readonly outputPort: IOutputPort
     ) {}
 
-    abstract execute(request: Request): void;
+    abstract execute(request: Request): Promise<void>;
 
     // protected handleSuccess(value: Response): Result<Response> {
     //     this.outputPort.success(value);
