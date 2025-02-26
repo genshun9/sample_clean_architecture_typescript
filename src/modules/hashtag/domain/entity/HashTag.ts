@@ -2,7 +2,7 @@ import {Entity} from "../../../../shared/domain/Entity";
 import {HashTagID} from "../valueObject/HashTagID";
 import {Text} from "../valueObject/Text";
 
-export class HashTag extends Entity<HashTagID> {
+export class HashTag extends Entity<HashTagID, string> {
     constructor(
         readonly id: HashTagID,
         private readonly text: Text,

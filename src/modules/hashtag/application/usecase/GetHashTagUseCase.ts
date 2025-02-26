@@ -1,16 +1,27 @@
-import {GetHashTagRequest, IGetHashTagInputPort} from "../port/HashTagInputPort";
+import {IGetHashTagInputPort} from "../port/HashTagInputPort";
 import {IHashTagRepository} from "../../domain/repository/HashTagRepository";
-import {ICreateHashTagOutputPort} from "../port/HashTagOutputPort";
-import {HashTagID} from "../../domain/valueObject/HashTagID";
+import {IHashTagOutputPort} from "../port/HashTagOutputPort";
+import {UseCase} from "../../../../shared/application/UseCase";
+import {convertGetHashTagRequest2Dto, convertHashTag2GetHashTagResponse, GetHashTagRequest} from "../dto";
 
-export class GetHashTagUseCase implements IGetHashTagInputPort {
+export class GetHashTagUseCase extends UseCase<GetHashTagRequest> implements IGetHashTagInputPort {
     constructor(
         private readonly hashTagRepository: IHashTagRepository,
-        private readonly outputPort: ICreateHashTagOutputPort
-    ) {}
+        readonly outputPort: IHashTagOutputPort
+    ) {
+        super(outputPort);
+    }
 
     async execute(request: GetHashTagRequest): Promise<void> {
-        const hashTag = this.hashTagRepository.findOneByID(new HashTagID(request.hashTagID));
-        this.outputPort.success(hashTag);
+        try {
+            //Repository経由で取得
+            const post = await this.hashTagRepository.findOneByID(convertGetHashTagRequest2Dto(request));
+            if (post === null) {
+                throw new Error("NO HASHTAG");
+            }
+            this.outputPort.successGetHashTag(convertHashTag2GetHashTagResponse(post));
+        } catch {
+            this.outputPort.failure(new Error("error"));
+        }
     }
 }
