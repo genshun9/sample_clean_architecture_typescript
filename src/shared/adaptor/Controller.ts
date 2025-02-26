@@ -1,4 +1,3 @@
-import {Response} from "express";
 import {IInputPort} from "../application/InputPort";
 import {IOutputPort} from "../application/OutputPort";
 
