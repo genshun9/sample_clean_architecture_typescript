@@ -3,7 +3,7 @@ import {Message} from "../valueObject/Message";
 import {UserID} from "../../../user/domain/valueObject/UserID";
 import {Entity} from "../../../../shared/domain/Entity";
 
-export class Post extends Entity<PostID>{
+export class Post extends Entity<PostID, string>{
     constructor(
         readonly id: PostID,
         private message: Message,

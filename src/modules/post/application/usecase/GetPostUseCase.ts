@@ -1,24 +1,28 @@
 import {IPostRepository} from "../../domain/repository/PostRepository";
-import {IUserRepository} from "../../../user/domain/repository/UserRepository";
-import {PostResponse} from "../dto/PostResponse";
-import {PostID} from "../../domain/valueObject/PostID";
+import {UseCase} from "../../../../shared/application/UseCase";
+import {convertGetPostRequest2Dto, convertPost2GetPostResponse, GetPostRequest} from "../dto";
+import {IGetPostInputPort} from "../port/PostInputPort";
+import {IPostOutputPort} from "../port/PostOutputPort";
 
-export class GetPostUseCase {
+export class GetPostUseCase extends UseCase<GetPostRequest> implements IGetPostInputPort {
     constructor(
-        private postRepository: IPostRepository,
-        private userRepository: IUserRepository
-    ) {}
+        private readonly postRepository: IPostRepository,
+        readonly outputPort: IPostOutputPort
+    ) {
+        super(outputPort);
+    }
 
-    async execute(postId: string): Promise<PostResponse> {
-        //Postを取得
-        const post = await this.postRepository.findOneByID(new PostID(postId));
-        if (!post) throw new Error("PostNotFound");
+    async execute(request: GetPostRequest): Promise<void> {
+        try {
+            //Repository経由で取得
+            const post = await this.postRepository.findOneByID(convertGetPostRequest2Dto(request));
+            if (post === null) {
+                throw new Error("NO POST");
+            }
+            this.outputPort.successGetPost(convertPost2GetPostResponse(post));
+        } catch {
+            this.outputPort.failure(new Error("error"));
+        }
 
-        // PostUserの情報を取得
-        const user = await this.userRepository.findOneByID(post.getPostedUserID());
-        if (!user) throw new Error("UserNotFound");
-
-        // レスポンスDTOを作成
-        return PostResponse.fromEntity(post, user.getName());
     }
 }
