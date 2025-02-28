@@ -3,7 +3,12 @@ import {User} from "../../../../domain/entity/User";
 import {UserID} from "../../../../domain/valueObject/UserID";
 import {Email} from "../../../../domain/valueObject/Email";
 import {Gateway} from "../../../../../../shared/adaptor/Gateway";
+import {UserName} from "../../../../domain/valueObject/UserName";
 
+export interface UpdateUserNameParam {
+    userID: UserID,
+    name: UserName
+}
 export class UserGateway extends Gateway<User, UserID, string> implements IUserRepository {
     // 適当な実装
     private cache: User[];
@@ -39,5 +44,16 @@ export class UserGateway extends Gateway<User, UserID, string> implements IUserR
         } else {
             return user;
         }
+    }
+
+    async updateUserName(param: UpdateUserNameParam): Promise<User> {
+        const user = this.cache.find(u => u.getID() === param.userID);
+        if (user === undefined) {
+            throw new Error("user not found");
+        } else {
+            user.updateName(param.name);
+            return user;
+        }
+
     }
 }

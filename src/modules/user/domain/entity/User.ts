@@ -26,8 +26,9 @@ export class User extends Entity<UserID, string> {
     }
 
     // UseCase層などでUserNameにして渡す方が厳密
-    updateName(newName: string): void {
-        this.name = new UserName(newName);
+    updateName(newName: UserName): void {
+        this.name = newName;
         this.updatedAt = new Date();
+        // 自身を返却するか、voidを返すかは要相談
     }
 }

@@ -11,4 +11,7 @@ export class UserPresenter extends Presenter implements IUserOutputPort {
     successGetAllUsers(users: any): void {
         this.response.send(users);
     }
+    successUpdateUserName(user: any): void {
+        this.response.send(user);
+    }
 }
