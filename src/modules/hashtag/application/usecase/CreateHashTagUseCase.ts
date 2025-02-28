@@ -1,13 +1,14 @@
-import {CreateHashTagRequest, ICreateHashTagInputPort} from "../port/HashTagInputPort";
+import {ICreateHashTagInputPort} from "../port/HashTagInputPort";
 import {IHashTagRepository} from "../../domain/repository/HashTagRepository";
 import {HashTagFactory} from "../../domain/factory/HashTagFactory";
-import {ICreateHashTagOutputPort} from "../port/HashTagOutputPort";
+import {CreateHashTagRequest} from "../dto";
+import {IHashTagOutputPort} from "../port/HashTagOutputPort";
 
 export class CreateHashTagUseCase implements ICreateHashTagInputPort {
     constructor(
         private readonly hashTagRepository: IHashTagRepository,
         private readonly hashTagFactory: HashTagFactory,
-        private readonly outputPort: ICreateHashTagOutputPort
+        private readonly outputPort: IHashTagOutputPort
     ) {}
 
     async execute(request: CreateHashTagRequest): Promise<void> {
@@ -15,6 +16,6 @@ export class CreateHashTagUseCase implements ICreateHashTagInputPort {
         const hashTag = this.hashTagFactory.create(request.text);
         // 永続化
         await this.hashTagRepository.save(hashTag);
-        this.outputPort.success({});
+        this.outputPort.successCreateHashTag({hashTag});
     }
 }
