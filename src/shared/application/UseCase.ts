@@ -1,12 +1,12 @@
 import {IOutputPort} from "./OutputPort";
 import {IInputPort} from "./InputPort";
 
-export abstract class UseCase<Request> implements IInputPort<Request>{
-    constructor(
+export abstract class UseCase<RequestDto> implements IInputPort<RequestDto>{
+    protected constructor(
         protected readonly outputPort: IOutputPort
     ) {}
 
-    abstract execute(request: Request): Promise<void>;
+    abstract execute(request: RequestDto): Promise<void>;
 
     // protected handleSuccess(value: Response): Result<Response> {
     //     this.outputPort.success(value);

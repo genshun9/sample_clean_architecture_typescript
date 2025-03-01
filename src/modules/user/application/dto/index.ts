@@ -36,3 +36,4 @@ export const convertUpdateUserNameRequest2Dto = (req: UpdateUserNameRequest) => 
     userID: UserID.create(req.userID),
     name: new UserName(req.name)
 })
+export const convertUsers2GetAllUsersResponse = (users: User[]) => ({users}) as GetAllUsersResponse

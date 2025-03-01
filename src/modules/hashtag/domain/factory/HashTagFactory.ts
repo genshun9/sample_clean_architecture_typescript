@@ -5,11 +5,14 @@ import {Text} from "../valueObject/Text";
 
 export class HashTagFactory implements IFactory<HashTag, HashTagID, string> {
     create(t: string): HashTag {
-        // 一旦ID生成はFactory内で実装
-        const hashTagID = HashTagID.create(crypto.randomUUID());
-        const text = new Text(t);
-        const now = new Date();
-
-        return new HashTag(hashTagID, text, now);
+        try {
+            // ID生成はFactory内で実装
+            const hashTagID = HashTagID.create(crypto.randomUUID());
+            const text = new Text(t);
+            const now = new Date();
+            return new HashTag(hashTagID, text, now);
+        } catch {
+            throw new Error("Invalid Create");
+        }
     }
 }

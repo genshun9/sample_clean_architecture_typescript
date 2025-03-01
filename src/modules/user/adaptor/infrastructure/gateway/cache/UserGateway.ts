@@ -10,8 +10,8 @@ export interface UpdateUserNameParam {
     name: UserName
 }
 export class UserGateway extends Gateway<User, UserID, string> implements IUserRepository {
-    // 適当な実装
-    private cache: User[];
+    // 適当にキャッシュで持たせる
+    private readonly cache: User[];
     constructor() {
         super();
         this.cache = []; //初期化
@@ -51,8 +51,8 @@ export class UserGateway extends Gateway<User, UserID, string> implements IUserR
         if (user === undefined) {
             throw new Error("user not found");
         } else {
-            user.updateName(param.name);
-            return user;
+            const updateUser = user.updateName(param.name);
+            return updateUser;
         }
 
     }

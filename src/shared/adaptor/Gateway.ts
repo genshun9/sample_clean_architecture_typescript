@@ -4,7 +4,7 @@ import {EntityID} from "../domain/EntityID";
 
 export abstract class Gateway<T extends Entity<ID, V>, ID extends EntityID<V>, V>
     implements IRepository<T, ID, V> {
-    constructor() {}
+    protected constructor() {}
 
     abstract save(entity: T): Promise<void>;
     abstract findOneByID(id: ID): Promise<T | null>;

@@ -5,9 +5,9 @@ import {Entity} from "../../../../shared/domain/Entity";
 
 export class User extends Entity<UserID, string> {
     constructor(
-        readonly id: UserID, //privateにするとエラーが発生する。なんでだっけ？
+        readonly id: UserID,
         private name: UserName,
-        private email: Email,
+        private readonly email: Email,
         private readonly createdAt: Date,
         private updatedAt: Date
     ) {
@@ -25,10 +25,18 @@ export class User extends Entity<UserID, string> {
         return this.email
     }
 
-    // UseCase層などでUserNameにして渡す方が厳密
-    updateName(newName: UserName): void {
+    getCreatedAt(): Date {
+        return this.createdAt
+    }
+
+    getUpdatedAt(): Date {
+        return this.updatedAt
+    }
+
+    // 自身を返却
+    updateName(newName: UserName): User {
         this.name = newName;
         this.updatedAt = new Date();
-        // 自身を返却するか、voidを返すかは要相談
+        return this;
     }
 }

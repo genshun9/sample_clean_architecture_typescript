@@ -1,10 +1,14 @@
 import {IOutputPort} from "../../../../shared/application/OutputPort";
-import {GetAllUsersRequest, GetUserResponse, UpdateUserNameResponse} from "../dto";
+import {
+    CreateUserResponse,
+    GetAllUsersResponse,
+    GetUserResponse,
+    UpdateUserNameResponse
+} from "../dto";
 
 export interface IUserOutputPort extends IOutputPort {
-    // TODO: DTOにする
-    successCreateUser(): void;
+    successCreateUser(user: CreateUserResponse): void;
     successGetUser(user: GetUserResponse): void;
-    successGetAllUsers(users: GetAllUsersRequest): void;
+    successGetAllUsers(users: GetAllUsersResponse): void;
     successUpdateUserName(user: UpdateUserNameResponse): void;
 }

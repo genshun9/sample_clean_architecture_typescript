@@ -1,10 +1,7 @@
 export abstract class EntityID<T> {
-    constructor(protected readonly value: T) {}
+    protected constructor(protected readonly value: T) {}
 
-    equals(id?: EntityID<T>): boolean {
-        if (id === null || id === undefined) {
-            return false;
-        }
+    equals(id: EntityID<T>): boolean {
         return this.value === id.value;
     }
 

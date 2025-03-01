@@ -2,7 +2,7 @@ import {IInputPort} from "../application/InputPort";
 import {IOutputPort} from "../application/OutputPort";
 
 export abstract class Controller<RequestDto> {
-    constructor(
+    protected constructor(
         protected readonly useCase: IInputPort<RequestDto>,
         protected readonly presenter: IOutputPort
     ) {}

@@ -6,12 +6,15 @@ import {IFactory} from "../../../../shared/domain/Factory";
 
 export class UserFactory implements IFactory<User, UserID, string> {
     create(name: string, email: string): User {
-        // 一旦ID生成はFactory内で実装
-        const userId = UserID.create(crypto.randomUUID());
-        const userName = new UserName(name);
-        const userEmail = new Email(email);
-        const now = new Date();
-
-        return new User(userId, userName, userEmail, now, now);
+        try {
+            // ID生成はFactory内で実装
+            const userId = UserID.create(crypto.randomUUID());
+            const userName = new UserName(name);
+            const userEmail = new Email(email);
+            const now = new Date();
+            return new User(userId, userName, userEmail, now, now);
+        } catch (err) {
+            throw new Error("Invalid Create");
+        }
     }
 }
