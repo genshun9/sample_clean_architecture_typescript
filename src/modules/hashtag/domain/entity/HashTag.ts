@@ -14,7 +14,12 @@ export class HashTag extends Entity<HashTagID, string> {
     getID(): HashTagID {
         return this.id;
     }
+
     getName(): Text {
         return this.text;
+    }
+
+    getCreatedAt(): Date {
+        return this.createdAt
     }
 }

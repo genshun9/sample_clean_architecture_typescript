@@ -12,10 +12,14 @@ export class CreateHashTagUseCase implements ICreateHashTagInputPort {
     ) {}
 
     async execute(request: CreateHashTagRequest): Promise<void> {
-        // Factory経由で作成
-        const hashTag = this.hashTagFactory.create(request.text);
-        // 永続化
-        await this.hashTagRepository.save(hashTag);
-        this.outputPort.successCreateHashTag({hashTag});
+        try {
+            // Factory経由で作成
+            const hashTag = this.hashTagFactory.create(request.text);
+            // 永続化
+            await this.hashTagRepository.save(hashTag);
+            this.outputPort.successCreateHashTag({hashTag});
+        } catch {
+            this.outputPort.failure(new Error("error"));
+        }
     }
 }

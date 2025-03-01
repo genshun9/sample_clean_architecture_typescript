@@ -4,8 +4,8 @@ import {HashTagID} from "../../../../domain/valueObject/HashTagID";
 import {Gateway} from "../../../../../../shared/adaptor/Gateway";
 
 export class HashTagGateway extends Gateway<HashTag, HashTagID, string> implements IHashTagRepository {
-    // 適当な実装
-    private cache: HashTag[];
+    // 適当にキャッシュで持たせる
+    private readonly cache: HashTag[];
     constructor() {
         super();
         this.cache = []; //初期化
@@ -16,7 +16,7 @@ export class HashTagGateway extends Gateway<HashTag, HashTagID, string> implemen
     }
 
     async findOneByID(id: HashTagID): Promise<HashTag | null> {
-        const hashTag = this.cache.find(u => u.getID() === id);
+        const hashTag = this.cache.find(u => u.getID().equals(id));
         if (hashTag === undefined) {
             return null;
         } else {
@@ -25,7 +25,7 @@ export class HashTagGateway extends Gateway<HashTag, HashTagID, string> implemen
     }
 
     async findSomeByIDs(ids: HashTagID[]): Promise<HashTag[]> {
-        return this.cache.filter(h => ids.some(id => id === h.getID()));
+        return this.cache.filter(h => ids.some(id => h.getID().equals(id)));
     }
 
     async findAll(): Promise<HashTag[]> {

@@ -22,7 +22,7 @@ export class UserGateway extends Gateway<User, UserID, string> implements IUserR
     }
 
     async findOneByID(id: UserID): Promise<User | null> {
-        const user = this.cache.find(u => u.getID() === id);
+        const user = this.cache.find(u => u.getID().equals(id));
         if (user === undefined) {
             return null;
         } else {
@@ -30,7 +30,7 @@ export class UserGateway extends Gateway<User, UserID, string> implements IUserR
         }
     }
     async findSomeByIDs(ids: UserID[]): Promise<User[]> {
-        return this.cache.filter(u => ids.some(id => id === u.getID()));
+        return this.cache.filter(u => ids.some(id => u.getID().equals(id)));
     }
 
     async findAll(): Promise<User[]> {
@@ -38,7 +38,7 @@ export class UserGateway extends Gateway<User, UserID, string> implements IUserR
     }
 
     async findByEmail(email: Email): Promise<User | null> {
-        const user = this.cache.find(u => u.getEmail() === email);
+        const user = this.cache.find(u => u.getEmail().equals(email));
         if (user === undefined) {
             return null
         } else {
@@ -47,7 +47,7 @@ export class UserGateway extends Gateway<User, UserID, string> implements IUserR
     }
 
     async updateUserName(param: UpdateUserNameParam): Promise<User> {
-        const user = this.cache.find(u => u.getID() === param.userID);
+        const user = this.cache.find(u => u.getID().equals(param.userID));
         if (user === undefined) {
             throw new Error("user not found");
         } else {

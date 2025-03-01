@@ -1,16 +1,16 @@
 import {IHashTagOutputPort} from "../../application/port/HashTagOutputPort";
 import {Presenter} from "../../../../shared/adaptor/Presenter";
-import {GetAllHashTagsResponse} from "../../application/dto";
+import {CreateHashTagResponse, GetAllHashTagsResponse, GetHashTagResponse} from "../../application/dto";
 
 export class HashTagPresenter extends Presenter implements IHashTagOutputPort {
-    successCreateHashTag(): void {
-        this.response.send();
+    successCreateHashTag(hashTag: CreateHashTagResponse): void {
+        this.response.send(hashTag);
     }
-    successGetHashTag(HashTag: any): void {
-        this.response.send(HashTag);
+    successGetHashTag(hashTag: GetHashTagResponse): void {
+        this.response.send(hashTag);
     }
 
-    successGetAllHashTags(HashTags: GetAllHashTagsResponse): void {
-        this.response.send(HashTags);
+    successGetAllHashTags(hashTags: GetAllHashTagsResponse): void {
+        this.response.send(hashTags);
     }
 }

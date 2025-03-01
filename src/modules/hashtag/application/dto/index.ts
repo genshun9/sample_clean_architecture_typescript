@@ -22,6 +22,4 @@ export interface GetAllHashTagsResponse {
 
 export const convertGetHashTagRequest2Dto = (req:GetHashTagRequest) => HashTagID.create(req.id);
 export const convertHashTag2GetHashTagResponse = (hashTag:HashTag) => ({hashTag}) as GetHashTagResponse;
-
-
 export const convertHashTag2GetAllHashTagsResponse = (hashTags:HashTag[]) => ({hashTags}) as GetAllHashTagsResponse
