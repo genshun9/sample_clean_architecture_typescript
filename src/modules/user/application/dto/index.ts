@@ -17,7 +17,7 @@ export interface GetUserResponse {
     user: User;
 }
 
-export type GetAllUsersRequest = void;
+export interface GetAllUsersRequest {}
 export interface GetAllUsersResponse {
     users: User[];
 }

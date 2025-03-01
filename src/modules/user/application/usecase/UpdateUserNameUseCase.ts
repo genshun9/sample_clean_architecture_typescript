@@ -8,8 +8,8 @@ import {IUpdateUserNameInputPort} from "../port/UserInputPort";
 
 export class UpdateUserNameUseCase extends UseCase<UpdateUserNameRequest> implements IUpdateUserNameInputPort {
     constructor(
-        private readonly userRepository: IUserRepository,
         readonly outputPort: IUserOutputPort,
+        private readonly userRepository: IUserRepository,
     ) {
         super(outputPort);
     }

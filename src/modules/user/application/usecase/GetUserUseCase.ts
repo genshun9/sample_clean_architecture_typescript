@@ -10,8 +10,8 @@ import {
 
 export class GetUserUseCase extends UseCase<GetUserRequest> implements IGetUserInputPort {
     constructor(
-        private readonly userRepository: IUserRepository,
         readonly outputPort: IUserOutputPort,
+        private readonly userRepository: IUserRepository,
     ) {
         super(outputPort);
     }

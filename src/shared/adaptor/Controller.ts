@@ -1,6 +1,7 @@
 import {IInputPort} from "../application/InputPort";
 import {IOutputPort} from "../application/OutputPort";
 
+// Controllerの基底クラス使っていない
 export abstract class Controller<RequestDto> {
     protected constructor(
         protected readonly useCase: IInputPort<RequestDto>,

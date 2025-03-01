@@ -9,8 +9,8 @@ import {
 
 export class GetAllUsersUseCase extends UseCase<GetAllUsersRequest> implements IGetAllUsersInputPort {
     constructor(
-        private readonly userRepository: IUserRepository,
         readonly outputPort: IUserOutputPort,
+        private readonly userRepository: IUserRepository,
     ) {
         super(outputPort);
     }

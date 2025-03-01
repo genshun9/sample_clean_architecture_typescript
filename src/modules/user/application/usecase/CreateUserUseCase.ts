@@ -8,9 +8,9 @@ import {CreateUserRequest} from "../dto";
 
 export class CreateUserUseCase extends UseCase<CreateUserRequest> implements ICreateUserInputPort {
     constructor(
+        readonly outputPort: IUserOutputPort,
         private readonly userRepository: IUserRepository,
         private readonly userFactory: UserFactory,
-        readonly outputPort: IUserOutputPort,
     ) {
         super(outputPort);
     }
