@@ -1,9 +1,9 @@
 import {IOutputPort} from "../../../../shared/application/OutputPort";
-import {GetAllPostsRequest, GetPostResponse} from "../dto";
+import {CreatePostResponse, GetAllPostsRequest, GetPostResponse, GetUserPostsResponse} from "../dto";
 
 export interface IPostOutputPort extends IOutputPort {
-    // TODO: DTOにする
-    successCreatePost(): void;
+    successCreatePost(post: CreatePostResponse): void;
     successGetPost(post: GetPostResponse): void;
+    successGetUserPosts(posts: GetUserPostsResponse): void;
     successGetAllPosts(posts: GetAllPostsRequest): void;
 }
