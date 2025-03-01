@@ -15,7 +15,7 @@ export interface GetHashTagResponse {
     hashTag: HashTag;
 }
 
-export type GetAllHashTagsRequest = void;
+export interface GetAllHashTagsRequest {};
 export interface GetAllHashTagsResponse {
     hashTags: HashTag[];
 }

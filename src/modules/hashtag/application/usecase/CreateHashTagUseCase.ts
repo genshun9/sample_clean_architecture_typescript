@@ -6,9 +6,9 @@ import {IHashTagOutputPort} from "../port/HashTagOutputPort";
 
 export class CreateHashTagUseCase implements ICreateHashTagInputPort {
     constructor(
+        private readonly outputPort: IHashTagOutputPort,
         private readonly hashTagRepository: IHashTagRepository,
         private readonly hashTagFactory: HashTagFactory,
-        private readonly outputPort: IHashTagOutputPort
     ) {}
 
     async execute(request: CreateHashTagRequest): Promise<void> {

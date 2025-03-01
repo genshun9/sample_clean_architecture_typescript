@@ -9,8 +9,8 @@ import {
 
 export class GetAllHashTagsUseCase extends UseCase<GetAllHashTagsRequest> implements IGetAllHashTagsInputPort {
     constructor(
+        readonly outputPort: IHashTagOutputPort,
         private readonly hashTagRepository: IHashTagRepository,
-        readonly outputPort: IHashTagOutputPort
     ) {
         super(outputPort);
     }

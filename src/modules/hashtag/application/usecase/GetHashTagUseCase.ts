@@ -6,8 +6,8 @@ import {convertGetHashTagRequest2Dto, convertHashTag2GetHashTagResponse, GetHash
 
 export class GetHashTagUseCase extends UseCase<GetHashTagRequest> implements IGetHashTagInputPort {
     constructor(
+        readonly outputPort: IHashTagOutputPort,
         private readonly hashTagRepository: IHashTagRepository,
-        readonly outputPort: IHashTagOutputPort
     ) {
         super(outputPort);
     }

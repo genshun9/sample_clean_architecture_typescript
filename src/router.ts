@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import moment from 'moment';
 import {UserController} from "./modules/user/adaptor/controller/UserController";
+import {HashTagController} from "./modules/hashtag/adaptor/controller/HashTagController";
+import {PostController} from "./modules/post/adaptor/controller/PostController";
 
 const router = express.Router();
 
@@ -13,7 +15,21 @@ router.use((req: Request, res: Response, next:Function) => {
     next();
 });
 
-// router.get("/users", (_: Request, res: Response) => UserController.getAll(res));
-// router.post("/post/create", (req: Request, res: Response) => PostController.create(res));
+// User
+router.post("/user/create", (req: Request, res: Response) => UserController.createUser(req, res));
+router.get("/user", (req: Request, res: Response) => UserController.getUser(req, res));
+router.get("/users", (req: Request, res: Response) => UserController.getAllUsers(req, res));
+router.put("/user/name",(req: Request, res: Response) => UserController.updateName(req, res));
+
+// HashTag
+router.post("/hashtag/create", (req: Request, res: Response) => HashTagController.createHashTag(req, res));
+router.get("/hashtag", (req: Request, res: Response) => HashTagController.getHashTag(req, res));
+router.get("/hashtags", (req: Request, res: Response) => HashTagController.getAllHashTags(req, res));
+
+// Post
+router.post("/post/create", (req: Request, res: Response) => PostController.createPost(req, res));
+router.get("/post", (req: Request, res: Response) => PostController.getPost(req, res));
+router.get("/post/user", (req: Request, res: Response) => PostController.getUserPosts(req, res));
+
 
 export default router;

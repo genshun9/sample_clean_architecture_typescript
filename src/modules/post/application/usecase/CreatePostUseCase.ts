@@ -7,9 +7,9 @@ import {CreatePostRequest} from "../dto";
 
 export class CreatePostUseCase extends UseCase<CreatePostRequest> implements ICreatePostInputPort {
     constructor(
+        readonly outputPort: IPostOutputPort,
         private readonly postRepository: IPostRepository,
         private readonly postFactory: PostFactory,
-        readonly outputPort: IPostOutputPort,
     ) {
         super(outputPort);
     }

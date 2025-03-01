@@ -6,8 +6,8 @@ import {IPostOutputPort} from "../port/PostOutputPort";
 
 export class GetUserPostsUseCase extends UseCase<GetUserPostsRequest> implements IGetUserPostsInputPort {
     constructor(
+        readonly outputPort: IPostOutputPort,
         private readonly postRepository: IPostRepository,
-        readonly outputPort: IPostOutputPort
     ) {
         super(outputPort);
     }
