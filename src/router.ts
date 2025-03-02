@@ -17,19 +17,19 @@ router.use((req: Request, res: Response, next:Function) => {
 
 // User
 router.post("/user/create", (req: Request, res: Response) => UserController.createUser(req, res));
-router.get("/user", (req: Request, res: Response) => UserController.getUser(req, res));
+router.get("/user/:id", (req: Request, res: Response) => UserController.getUser(req, res));
 router.get("/users", (req: Request, res: Response) => UserController.getAllUsers(req, res));
 router.put("/user/name",(req: Request, res: Response) => UserController.updateName(req, res));
 
 // HashTag
 router.post("/hashtag/create", (req: Request, res: Response) => HashTagController.createHashTag(req, res));
-router.get("/hashtag", (req: Request, res: Response) => HashTagController.getHashTag(req, res));
+router.get("/hashtag/:id", (req: Request, res: Response) => HashTagController.getHashTag(req, res));
 router.get("/hashtags", (req: Request, res: Response) => HashTagController.getAllHashTags(req, res));
 
 // Post
 router.post("/post/create", (req: Request, res: Response) => PostController.createPost(req, res));
-router.get("/post", (req: Request, res: Response) => PostController.getPost(req, res));
-router.get("/post/user", (req: Request, res: Response) => PostController.getUserPosts(req, res));
+router.get("/post/:post_id", (req: Request, res: Response) => PostController.getPost(req, res));
+router.get("/post/user/:user_id", (req: Request, res: Response) => PostController.getUserPosts(req, res));
 
 
 export default router;

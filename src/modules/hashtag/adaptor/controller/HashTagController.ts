@@ -5,20 +5,27 @@ import {HashTagGateway} from "../infrastructure/gateway/cache/HashTagGateway";
 import {HashTagFactory} from "../../domain/factory/HashTagFactory";
 import {GetHashTagUseCase} from "../../application/usecase/GetHashTagUseCase";
 import {GetAllHashTagsUseCase} from "../../application/usecase/GetAllHashTagsUseCase";
+import {CreateHashTagRequest, GetHashTagRequest} from "../../application/dto";
 
 export const HashTagController = {
     createHashTag(req:Request, res:Response):void {
-        const request = {
-            text: req.body.text
+        const text = req.body.text;
+        if (!text || typeof text !== 'string') {
+            res.status(400).send("Invalid Request");
+            return;
         }
+        const request:CreateHashTagRequest = ({text});
         const usecase = new CreateHashTagUseCase(new HashTagPresenter(res), new HashTagGateway(), new HashTagFactory());
         usecase.execute(request);
     },
 
     getHashTag(req:Request, res:Response):void {
-        const request = {
-            id: req.body.id
-        };
+        const postID = req.query.post_id;
+        if (!postID || typeof postID !== 'string') {
+            res.status(400).send("Invalid Request");
+            return;
+        }
+        const request:GetHashTagRequest = ({id: postID});
         const usecase = new GetHashTagUseCase(new HashTagPresenter(res), new HashTagGateway());
         usecase.execute(request);
     },
