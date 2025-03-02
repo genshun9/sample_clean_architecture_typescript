@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/genshun9/sample_clean_architecture_typescript#readme",
   "dependencies": {
-    "body-parser": "1.20.3",
     "crypto": "1.0.1",
     "express": "4.21.2",
     "moment": "2.30.1",
