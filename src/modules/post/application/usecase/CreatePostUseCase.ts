@@ -1,14 +1,14 @@
-import {PostRepository} from "../../domain/repository/PostRepository";
 import {PostFactory} from "../../domain/factory/PostFactory";
 import {CreatePostInputPort} from "../port/PostInputPort";
 import {UseCase} from "../../../../shared/application/UseCase";
 import {PostOutputPort} from "../port/PostOutputPort";
 import {CreatePostRequest} from "../dto";
+import {PostAggregateRepository} from "../../domain/repository/PostAggregateRepository";
 
 export class CreatePostUseCase extends UseCase<CreatePostRequest> implements CreatePostInputPort {
     constructor(
         readonly outputPort: PostOutputPort,
-        private readonly postRepository: PostRepository,
+        private readonly postRepository: PostAggregateRepository,
         private readonly postFactory: PostFactory,
     ) {
         super(outputPort);

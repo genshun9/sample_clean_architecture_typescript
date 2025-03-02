@@ -1,6 +1,10 @@
 import {PostID} from "../../../../domain/valueObject/PostID";
 import {UserID} from "../../../../../user/domain/valueObject/UserID";
-import {PostAggregateRepository} from "../../../../domain/repository/PostAggregateRepository";
+import {
+    AddFavoriteParam,
+    PostAggregateRepository,
+    RemoveFavoriteParam
+} from "../../../../domain/repository/PostAggregateRepository";
 import {Post} from "../../../../domain/entity/Post";
 import {PostAggregate} from "../../../../domain/aggregate/PostAggregate";
 
@@ -34,19 +38,19 @@ export class PostAggregateGateway implements PostAggregateRepository {
         return aggregate.map(a => a.rootEntity);
     }
 
-    async saveFavorite(postID: PostID, userID: UserID): Promise<PostAggregate> {
-        const aggregate = this.cache.find(a => a.getID().equals(postID));
+    async saveFavorite(param: AddFavoriteParam): Promise<PostAggregate> {
+        const aggregate = this.cache.find(a => a.getID().equals(param.postID));
         if (aggregate === undefined) {
             throw new Error("No POST FOUND");
         }
-        return aggregate.addFavorite(userID);
+        return aggregate.addFavorite(param.userID);
     }
-    async saveUnfavorite(postID: PostID, userID: UserID): Promise<PostAggregate> {
-        const aggregate = this.cache.find(a => a.getID().equals(postID));
+    async saveUnfavorite(param: RemoveFavoriteParam): Promise<PostAggregate> {
+        const aggregate = this.cache.find(a => a.getID().equals(param.postID));
         if (aggregate === undefined) {
             throw new Error("No POST FOUND");
         }
-        return aggregate.removeFavorite(userID);
+        return aggregate.removeFavorite(param.userID);
     }
     async findAll(): Promise<PostAggregate[]> {
         return this.cache;
