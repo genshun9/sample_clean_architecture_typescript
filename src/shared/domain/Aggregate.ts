@@ -1,8 +1,16 @@
 import {Entity} from "./Entity";
 import {EntityID} from "./EntityID";
 
+// 諸々基底クラスを継承させるため、AggregateがEntityと互換性を持つためのインターフェース
+// 今回はfindOneByIDの戻り値がAggregateではなくEntityのケースがあり、共通化のデメリットとなるので使わず
+// export interface AggregateRoot<ID extends EntityID<V>, V> {
+//     getID(): ID;
+//     equals(entity: AggregateRoot<ID, V>): boolean;
+// }
+
 export abstract class Aggregate<E extends Entity<ID, V>, ID extends EntityID<V>, V> {
     protected constructor(
+        protected readonly id: ID,
         protected readonly rootEntity: E
     ) {}
 
@@ -24,12 +32,13 @@ export abstract class Aggregate<E extends Entity<ID, V>, ID extends EntityID<V>,
     }
 }
 
+// 互換性持たせない場合、Aggregate専用のRepositoryの型を作るしかない
 export interface AggregateRepository<
     A extends Aggregate<E, ID, V>,
     E extends Entity<ID, V>,
     ID extends EntityID<V>,
     V> {
-    save(entity: A): Promise<void>;
+    save(entity: E): Promise<void>;
     findOneByID(id: ID): Promise<E | null>;
-    findAll(): Promise<E[]>;
+    findAll(): Promise<A[]>;
 }

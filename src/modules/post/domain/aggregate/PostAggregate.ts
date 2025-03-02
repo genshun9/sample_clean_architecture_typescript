@@ -8,10 +8,11 @@ import {Aggregate} from "../../../../shared/domain/Aggregate";
 
 export class PostAggregate extends Aggregate<Post, PostID, string> {
     constructor(
+        readonly id: PostID,
         readonly rootEntity: Post,
         private readonly favorites: Favorite[]
     ) {
-        super(rootEntity);
+        super(id, rootEntity);
     }
 
     getMessage(): Message {
@@ -52,6 +53,7 @@ export class PostAggregate extends Aggregate<Post, PostID, string> {
 
         // 新しいRootEntityを返す
         return new PostAggregate(
+            this.getID(),
             this.getRoot(),
             [...this.favorites, favorite]
         );
@@ -71,6 +73,7 @@ export class PostAggregate extends Aggregate<Post, PostID, string> {
 
         // 新しいRootEntityを返す
         return new PostAggregate(
+            this.getID(),
             this.getRoot(),
             updatedFavorites
         );
