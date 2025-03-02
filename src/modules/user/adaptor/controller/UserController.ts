@@ -11,7 +11,7 @@ export const UserController = {
     createUser(req:Request, res:Response):void {
         const name = req.body.name;
         const email = req.body.email;
-        if (!name || typeof name !== 'string' || !email || typeof email !== 'string') {
+        if (!name || typeof name !== "string" || !email || typeof email !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -28,7 +28,7 @@ export const UserController = {
 
     getUser(req:Request, res:Response):void {
         const userID = req.query.id;
-        if (!userID || typeof userID !== 'string') {
+        if (!userID || typeof userID !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -56,7 +56,7 @@ export const UserController = {
     updateName(req:Request, res:Response):void {
         const userID = req.body.userId;
         const name = req.body.name;
-        if (!userID || typeof userID !== 'string' || !name || typeof name !== 'string') {
+        if (!userID || typeof userID !== "string" || !name || typeof name !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }

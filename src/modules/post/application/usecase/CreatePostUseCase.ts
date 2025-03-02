@@ -5,9 +5,6 @@ import {UseCase} from "../../../../shared/application/UseCase";
 import {PostOutputPort} from "../port/PostOutputPort";
 import {CreatePostRequest} from "../dto";
 import {PostAggregateRepository} from "../../domain/repository/PostAggregateRepository";
-import {HashTagRepository} from "../../../hashtag/domain/repository/HashTagRepository";
-import {HashTagFactory} from "../../../hashtag/domain/factory/HashTagFactory";
-import {HashTagOutputPort} from "../../../hashtag/application/port/HashTagOutputPort";
 
 @injectable()
 export class CreatePostUseCase extends UseCase<CreatePostRequest> implements CreatePostInputPort {

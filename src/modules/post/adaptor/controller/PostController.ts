@@ -1,7 +1,6 @@
 import {Request, Response} from "express";
 import {CreatePostUseCase} from "../../application/usecase/CreatePostUseCase";
 import {PostPresenter} from "../presenter/PostPresenter";
-import {PostFactory} from "../../domain/factory/PostFactory";
 import {GetPostUseCase} from "../../application/usecase/GetPostUseCase";
 import {GetUserPostsUseCase} from "../../application/usecase/GetUserPostsUseCase";
 import {
@@ -9,21 +8,19 @@ import {
     CreatePostRequest,
     GetFavoritePostsRequest,
     GetPostRequest,
-    GetUserPostsRequest, RemoveFavoriteRequest
+    GetUserPostsRequest,
+    RemoveFavoriteRequest
 } from "../../application/dto";
-import {PostAggregateGateway} from "../infrastructure/gateway/cache/PostAggerageGateway";
 import {GetFavoritePostsUseCase} from "../../application/usecase/GetFavoritePostUseCase";
 import {AddFavoriteUseCase} from "../../application/usecase/AddFavoriteUseCase";
 import {RemoveFavoriteUseCase} from "../../application/usecase/RemoveFavoriteUseCase";
 import {container} from "tsyringe";
-import {CreateHashTagUseCase} from "../../../hashtag/application/usecase/CreateHashTagUseCase";
-import {HashTagPresenter} from "../../../hashtag/adaptor/presenter/HashTagPresenter";
 
 export const PostController = {
     createPost(req:Request, res:Response):void {
         const message = req.body.message;
         const userId = req.body.userId;
-        if (!message || typeof message !== 'string' || !userId || typeof userId !== 'string') {
+        if (!message || typeof message !== "string" || !userId || typeof userId !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -40,7 +37,7 @@ export const PostController = {
 
     getPost(req:Request, res:Response):void {
         const postId = req.query.post_id;
-        if (!postId || typeof postId !== 'string') {
+        if (!postId || typeof postId !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -57,7 +54,7 @@ export const PostController = {
 
     getUserPosts(req:Request, res:Response):void {
         const userId = req.query.userId;
-        if (!userId || typeof userId !== 'string') {
+        if (!userId || typeof userId !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -74,7 +71,7 @@ export const PostController = {
 
     getFavoritePosts(req:Request, res:Response):void {
         const userId = req.query.userId;
-        if (!userId || typeof userId !== 'string') {
+        if (!userId || typeof userId !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -92,7 +89,7 @@ export const PostController = {
     addFavorite(req:Request, res:Response):void {
         const userId = req.query.userId;
         const postId = req.query.postId;
-        if (!userId || typeof userId !== 'string' || !postId || typeof postId !== 'string') {
+        if (!userId || typeof userId !== "string" || !postId || typeof postId !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -110,7 +107,7 @@ export const PostController = {
     removeFavorite(req:Request, res:Response):void {
         const userId = req.query.userId;
         const postId = req.query.postId;
-        if (!userId || typeof userId !== 'string' || !postId || typeof postId !== 'string') {
+        if (!userId || typeof userId !== "string" || !postId || typeof postId !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }

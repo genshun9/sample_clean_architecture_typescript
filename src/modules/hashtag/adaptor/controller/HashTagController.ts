@@ -1,19 +1,15 @@
 import {Request, Response} from "express";
 import {CreateHashTagUseCase} from "../../application/usecase/CreateHashTagUseCase";
 import {HashTagPresenter} from "../presenter/HashTagPresenter";
-import {HashTagGateway} from "../infrastructure/gateway/cache/HashTagGateway";
-import {HashTagFactory} from "../../domain/factory/HashTagFactory";
 import {GetHashTagUseCase} from "../../application/usecase/GetHashTagUseCase";
 import {GetAllHashTagsUseCase} from "../../application/usecase/GetAllHashTagsUseCase";
 import {CreateHashTagRequest, GetHashTagRequest} from "../../application/dto";
 import {container} from "tsyringe";
-import {CreateUserUseCase} from "../../../user/application/usecase/CreateUserUseCase";
-import {UserPresenter} from "../../../user/adaptor/presenter/UserPresenter";
 
 export const HashTagController = {
     createHashTag(req:Request, res:Response):void {
         const text = req.body.text;
-        if (!text || typeof text !== 'string') {
+        if (!text || typeof text !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }
@@ -30,7 +26,7 @@ export const HashTagController = {
 
     getHashTag(req:Request, res:Response):void {
         const postID = req.query.post_id;
-        if (!postID || typeof postID !== 'string') {
+        if (!postID || typeof postID !== "string") {
             res.status(400).send("Invalid Request");
             return;
         }

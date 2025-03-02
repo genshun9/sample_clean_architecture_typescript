@@ -4,10 +4,7 @@ import {HashTagRepository} from "../../domain/repository/HashTagRepository";
 import {HashTagFactory} from "../../domain/factory/HashTagFactory";
 import {CreateHashTagRequest} from "../dto";
 import {HashTagOutputPort} from "../port/HashTagOutputPort";
-import {UserRepository} from "../../../user/domain/repository/UserRepository";
-import {UserFactory} from "../../../user/domain/factory/UserFactory";
 import {UseCase} from "../../../../shared/application/UseCase";
-import {CreateUserRequest} from "../../../user/application/dto";
 
 @injectable()
 export class CreateHashTagUseCase extends UseCase<CreateHashTagRequest> implements CreateHashTagInputPort {
