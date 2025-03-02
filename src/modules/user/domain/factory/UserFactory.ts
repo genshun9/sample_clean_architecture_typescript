@@ -14,7 +14,7 @@ export class UserFactory implements Factory<User, UserID, string> {
             const now = new Date();
             return new User(userId, userName, userEmail, now, now);
         } catch (err) {
-            throw new Error("Invalid Create");
+            throw new Error(`Invalid Create: ${err}`);
         }
     }
 }

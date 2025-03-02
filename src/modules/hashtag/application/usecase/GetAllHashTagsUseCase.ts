@@ -16,7 +16,7 @@ export class GetAllHashTagsUseCase extends UseCase<GetAllHashTagsRequest> implem
         super();
     }
 
-    async execute(request: GetAllHashTagsRequest): Promise<void> {
+    async execute(_: GetAllHashTagsRequest): Promise<void> {
         try {
             // outputPortの設定チェック
             this.validateOutputPort();

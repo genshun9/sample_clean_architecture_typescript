@@ -16,7 +16,7 @@ export class GetAllUsersUseCase extends UseCase<GetAllUsersRequest> implements G
         super();
     }
 
-    async execute(request: GetAllUsersRequest): Promise<void> {
+    async execute(_: GetAllUsersRequest): Promise<void> {
         try {
             // outputPortの設定チェック
             this.validateOutputPort();

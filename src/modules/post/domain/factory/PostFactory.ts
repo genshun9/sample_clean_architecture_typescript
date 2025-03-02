@@ -14,7 +14,7 @@ export class PostFactory implements Factory<Post, PostID, string> {
             const now = new Date();
             return new Post(postID, message, postUserID, now);
         } catch (err) {
-            throw new Error("Invalid Create");
+            throw new Error(`Invalid Create: ${err}`);
         }
     }
 }

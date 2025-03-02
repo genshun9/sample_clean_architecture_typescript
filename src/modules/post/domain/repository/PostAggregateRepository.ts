@@ -3,7 +3,6 @@ import {UserID} from "../../../user/domain/valueObject/UserID";
 import {PostAggregate} from "../aggregate/PostAggregate";
 import {Post} from "../entity/Post";
 import {AggregateRepository} from "../../../../shared/domain/Aggregate";
-import {UserName} from "../../../user/domain/valueObject/UserName";
 
 // EntityとAggregateが互換性を持たせる場合Repositoryを継承すれば良い。今回は使わず。
 // export interface PostAggregateRepository extends Repository<PostAggregate, PostID, string>{

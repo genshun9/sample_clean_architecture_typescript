@@ -1,6 +1,5 @@
 import {Response} from "express";
 import {OutputPort} from "../application/OutputPort";
-import {Result, UseCaseResult} from "../application/UseCaseResult";
 
 export abstract class Presenter implements OutputPort {
     // Presenterがフレームワーク(express)に依存する形になるが、一番外の層なので良しとする
