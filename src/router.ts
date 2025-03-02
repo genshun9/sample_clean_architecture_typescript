@@ -6,7 +6,7 @@ import {PostController} from "./modules/post/adaptor/controller/PostController";
 
 const router = express.Router();
 
-router.use((req: Request, res: Response, next:() => {}) => {
+router.use((req: Request, res: Response, next:Function) => {
     process.stdout.write(`[${moment().format("LTS")}]
        url: ${req.method} ${req.url}
        header: ${JSON.stringify(req.headers)}
