@@ -15,7 +15,7 @@ export class HashTag extends Entity<HashTagID, string> {
         return this.id;
     }
 
-    getName(): Text {
+    getText(): Text {
         return this.text;
     }
 

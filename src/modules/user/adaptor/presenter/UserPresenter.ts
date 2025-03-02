@@ -1,19 +1,24 @@
 import {UserOutputPort} from "../../application/port/UserOutputPort";
 import {Presenter} from "../../../../shared/adaptor/Presenter";
 import {CreateUserResponse, GetAllUsersResponse, GetUserResponse, UpdateUserNameResponse} from "../../application/dto";
+import {convertUser2UserDto, UserDTO} from "./dto";
 
 export class UserPresenter extends Presenter implements UserOutputPort {
-    successCreateUser(user: CreateUserResponse): void {
-        this.response.send(user);
+    successCreateUser(userResponse: CreateUserResponse): void {
+        const userDto:UserDTO = convertUser2UserDto(userResponse.user);
+        this.response.send(userDto);
     }
-    successGetUser(user: GetUserResponse): void {
-        this.response.send(user);
+    successGetUser(userResponse: GetUserResponse): void {
+        const userDto:UserDTO = convertUser2UserDto(userResponse.user);
+        this.response.send(userDto);
     }
 
-    successGetAllUsers(users: GetAllUsersResponse): void {
-        this.response.send(users);
+    successGetAllUsers(usersResponse: GetAllUsersResponse): void {
+        const userDtos:UserDTO[] = usersResponse.users.map(u => convertUser2UserDto(u));
+        this.response.send(userDtos);
     }
-    successUpdateUserName(user: UpdateUserNameResponse): void {
-        this.response.send(user);
+    successUpdateUserName(userResponse: UpdateUserNameResponse): void {
+        const userDto:UserDTO = convertUser2UserDto(userResponse.user);
+        this.response.send(userDto);
     }
 }
