@@ -3,8 +3,9 @@ import {HashTagRepository} from "../../domain/repository/HashTagRepository";
 import {HashTagOutputPort} from "../port/HashTagOutputPort";
 import {UseCase} from "../../../../shared/application/UseCase";
 import {convertGetHashTagRequest2Dto, convertHashTag2GetHashTagResponse, GetHashTagRequest} from "../dto";
-import {inject} from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
+@injectable()
 export class GetHashTagUseCase extends UseCase<GetHashTagRequest> implements GetHashTagInputPort {
     constructor(
         @inject("HashTagRepository") private readonly hashTagRepository: HashTagRepository,

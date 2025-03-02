@@ -15,6 +15,9 @@ import {PostAggregateGateway} from "../infrastructure/gateway/cache/PostAggerage
 import {GetFavoritePostsUseCase} from "../../application/usecase/GetFavoritePostUseCase";
 import {AddFavoriteUseCase} from "../../application/usecase/AddFavoriteUseCase";
 import {RemoveFavoriteUseCase} from "../../application/usecase/RemoveFavoriteUseCase";
+import {container} from "tsyringe";
+import {CreateHashTagUseCase} from "../../../hashtag/application/usecase/CreateHashTagUseCase";
+import {HashTagPresenter} from "../../../hashtag/adaptor/presenter/HashTagPresenter";
 
 export const PostController = {
     createPost(req:Request, res:Response):void {
@@ -25,7 +28,13 @@ export const PostController = {
             return;
         }
         const request:CreatePostRequest = ({message, userId: userId});
-        const usecase = new CreatePostUseCase(new PostPresenter(res), new PostAggregateGateway(), new PostFactory());
+
+        // DIコンテナから依存性を解決しUseCaseを生成
+        const usecase = container.resolve(CreatePostUseCase);
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new PostPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     },
 
@@ -36,7 +45,13 @@ export const PostController = {
             return;
         }
         const request:GetPostRequest = ({id: postId});
-        const usecase = new GetPostUseCase(new PostPresenter(res), new PostAggregateGateway());
+
+        // DIコンテナから依存性を解決しUseCaseを生成
+        const usecase = container.resolve(GetPostUseCase);
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new PostPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     },
 
@@ -47,7 +62,13 @@ export const PostController = {
             return;
         }
         const request:GetUserPostsRequest = ({userId});
-        const usecase = new GetUserPostsUseCase(new PostPresenter(res), new PostAggregateGateway());
+
+        // DIコンテナから依存性を解決しUseCaseを生成
+        const usecase = container.resolve(GetUserPostsUseCase);
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new PostPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     },
 
@@ -58,7 +79,13 @@ export const PostController = {
             return;
         }
         const request:GetFavoritePostsRequest = ({userId});
-        const usecase = new GetFavoritePostsUseCase(new PostPresenter(res), new PostAggregateGateway());
+
+        // DIコンテナから依存性を解決しUseCaseを生成
+        const usecase = container.resolve(GetFavoritePostsUseCase);
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new PostPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     },
 
@@ -70,7 +97,13 @@ export const PostController = {
             return;
         }
         const request:AddFavoriteRequest = ({userId, postId});
-        const usecase = new AddFavoriteUseCase(new PostPresenter(res), new PostAggregateGateway());
+
+        // DIコンテナから依存性を解決しUseCaseを生成
+        const usecase = container.resolve(AddFavoriteUseCase);
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new PostPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     },
 
@@ -82,7 +115,13 @@ export const PostController = {
             return;
         }
         const request:RemoveFavoriteRequest = ({userId, postId});
-        const usecase = new RemoveFavoriteUseCase(new PostPresenter(res), new PostAggregateGateway());
+
+        // DIコンテナから依存性を解決しUseCaseを生成
+        const usecase = container.resolve(RemoveFavoriteUseCase);
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new PostPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     }
 }

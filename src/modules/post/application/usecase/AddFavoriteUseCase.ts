@@ -7,22 +7,25 @@ import {
 import {AddFavoriteInputPort} from "../port/PostInputPort";
 import {PostOutputPort} from "../port/PostOutputPort";
 import {PostAggregateRepository} from "../../domain/repository/PostAggregateRepository";
+import {inject, injectable} from "tsyringe";
 
+@injectable()
 export class AddFavoriteUseCase extends UseCase<AddFavoriteRequest> implements AddFavoriteInputPort {
     constructor(
-        readonly outputPort: PostOutputPort,
-        private readonly postRepository: PostAggregateRepository,
+        @inject("PostAggregateRepository") private readonly postAggregateRepository: PostAggregateRepository,
     ) {
-        super(outputPort);
+        super();
     }
 
     async execute(request: AddFavoriteRequest): Promise<void> {
         try {
+            // outputPortの設定チェック
+            this.validateOutputPort();
             //Repository経由で取得
-            const postAggregate = await this.postRepository.saveFavorite(convertAddFavoriteRequest2Dto(request));
-            this.outputPort.successAddFavorite(convertPost2AddFavoritePostResponse(postAggregate.rootEntity));
+            const postAggregate = await this.postAggregateRepository.saveFavorite(convertAddFavoriteRequest2Dto(request));
+            (this.outputPort as PostOutputPort).successAddFavorite(convertPost2AddFavoritePostResponse(postAggregate.rootEntity));
         } catch {
-            this.outputPort.failure(new Error("error"));
+            (this.outputPort as PostOutputPort).failure(new Error("error"));
         }
 
     }

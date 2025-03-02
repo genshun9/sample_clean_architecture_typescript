@@ -3,22 +3,23 @@ import {convertGetUserPostsRequest2Dto, convertPosts2GetUserPostsResponse, GetUs
 import {GetUserPostsInputPort} from "../port/PostInputPort";
 import {PostOutputPort} from "../port/PostOutputPort";
 import {PostAggregateRepository} from "../../domain/repository/PostAggregateRepository";
+import {inject, injectable} from "tsyringe";
 
+@injectable()
 export class GetUserPostsUseCase extends UseCase<GetUserPostsRequest> implements GetUserPostsInputPort {
     constructor(
-        readonly outputPort: PostOutputPort,
-        private readonly postRepository: PostAggregateRepository,
+        @inject("PostAggregateRepository") private readonly postAggregateRepository: PostAggregateRepository,
     ) {
-        super(outputPort);
+        super();
     }
 
     async execute(request: GetUserPostsRequest): Promise<void> {
         try {
             //Repository経由で取得
-            const posts = await this.postRepository.findSomeByUserID(convertGetUserPostsRequest2Dto(request));
-            this.outputPort.successGetUserPosts(convertPosts2GetUserPostsResponse(posts));
+            const posts = await this.postAggregateRepository.findSomeByUserID(convertGetUserPostsRequest2Dto(request));
+            (this.outputPort as PostOutputPort).successGetUserPosts(convertPosts2GetUserPostsResponse(posts));
         } catch {
-            this.outputPort.failure(new Error("error"));
+            (this.outputPort as PostOutputPort).failure(new Error("error"));
         }
 
     }

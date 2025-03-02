@@ -6,8 +6,9 @@ import {
     convertHashTag2GetAllHashTagsResponse,
     GetAllHashTagsRequest,
 } from "../dto";
-import {inject} from "tsyringe";
+import {inject, injectable} from "tsyringe";
 
+@injectable()
 export class GetAllHashTagsUseCase extends UseCase<GetAllHashTagsRequest> implements GetAllHashTagsInputPort {
     constructor(
         @inject("HashTagRepository") private readonly hashTagRepository: HashTagRepository,
