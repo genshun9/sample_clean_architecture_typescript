@@ -1,15 +1,15 @@
-import {IUserRepository} from "../../domain/repository/UserRepository";
+import {UserRepository} from "../../domain/repository/UserRepository";
 import {UserFactory} from "../../domain/factory/UserFactory";
 import {Email} from "../../domain/valueObject/Email";
-import {ICreateUserInputPort} from "../port/UserInputPort";
+import {CreateUserInputPort} from "../port/UserInputPort";
 import {UseCase} from "../../../../shared/application/UseCase";
-import {IUserOutputPort} from "../port/UserOutputPort";
+import {UserOutputPort} from "../port/UserOutputPort";
 import {CreateUserRequest} from "../dto";
 
-export class CreateUserUseCase extends UseCase<CreateUserRequest> implements ICreateUserInputPort {
+export class CreateUserUseCase extends UseCase<CreateUserRequest> implements CreateUserInputPort {
     constructor(
-        readonly outputPort: IUserOutputPort,
-        private readonly userRepository: IUserRepository,
+        readonly outputPort: UserOutputPort,
+        private readonly userRepository: UserRepository,
         private readonly userFactory: UserFactory,
     ) {
         super(outputPort);

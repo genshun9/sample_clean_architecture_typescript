@@ -1,9 +1,9 @@
-import {IOutputPort} from "./OutputPort";
-import {IInputPort} from "./InputPort";
+import {OutputPort} from "./OutputPort";
+import {InputPort} from "./InputPort";
 
-export abstract class UseCase<RequestDto> implements IInputPort<RequestDto>{
+export abstract class UseCase<RequestDto> implements InputPort<RequestDto>{
     protected constructor(
-        protected readonly outputPort: IOutputPort
+        protected readonly outputPort: OutputPort
     ) {}
 
     abstract execute(request: RequestDto): Promise<void>;

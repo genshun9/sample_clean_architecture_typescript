@@ -1,10 +1,10 @@
 import {Post} from "../entity/Post";
 import {PostID} from "../valueObject/PostID";
-import {IFactory} from "../../../../shared/domain/Factory";
+import {Factory} from "../../../../shared/domain/Factory";
 import {Message} from "../valueObject/Message";
 import {UserID} from "../../../user/domain/valueObject/UserID";
 
-export class PostFactory implements IFactory<Post, PostID, string> {
+export class PostFactory implements Factory<Post, PostID, string> {
     create(m: string, userID: string): Post {
         try {
             // ID生成はFactory内で実装

@@ -1,16 +1,16 @@
-import {IGetAllHashTagsInputPort} from "../port/HashTagInputPort";
-import {IHashTagRepository} from "../../domain/repository/HashTagRepository";
-import {IHashTagOutputPort} from "../port/HashTagOutputPort";
+import {GetAllHashTagsInputPort} from "../port/HashTagInputPort";
+import {HashTagRepository} from "../../domain/repository/HashTagRepository";
+import {HashTagOutputPort} from "../port/HashTagOutputPort";
 import {UseCase} from "../../../../shared/application/UseCase";
 import {
     convertHashTag2GetAllHashTagsResponse,
     GetAllHashTagsRequest,
 } from "../dto";
 
-export class GetAllHashTagsUseCase extends UseCase<GetAllHashTagsRequest> implements IGetAllHashTagsInputPort {
+export class GetAllHashTagsUseCase extends UseCase<GetAllHashTagsRequest> implements GetAllHashTagsInputPort {
     constructor(
-        readonly outputPort: IHashTagOutputPort,
-        private readonly hashTagRepository: IHashTagRepository,
+        readonly outputPort: HashTagOutputPort,
+        private readonly hashTagRepository: HashTagRepository,
     ) {
         super(outputPort);
     }

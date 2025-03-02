@@ -1,9 +1,9 @@
-import {IHashTagRepository} from "../../../../domain/repository/HashTagRepository";
+import {HashTagRepository} from "../../../../domain/repository/HashTagRepository";
 import {HashTag} from "../../../../domain/entity/HashTag";
 import {HashTagID} from "../../../../domain/valueObject/HashTagID";
 import {Gateway} from "../../../../../../shared/adaptor/Gateway";
 
-export class HashTagGateway extends Gateway<HashTag, HashTagID, string> implements IHashTagRepository {
+export class HashTagGateway extends Gateway<HashTag, HashTagID, string> implements HashTagRepository {
     // 適当にキャッシュで持たせる
     private readonly cache: HashTag[];
     constructor() {

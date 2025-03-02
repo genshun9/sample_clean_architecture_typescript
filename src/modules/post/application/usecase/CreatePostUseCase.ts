@@ -1,14 +1,14 @@
-import {IPostRepository} from "../../domain/repository/PostRepository";
+import {PostRepository} from "../../domain/repository/PostRepository";
 import {PostFactory} from "../../domain/factory/PostFactory";
-import {ICreatePostInputPort} from "../port/PostInputPort";
+import {CreatePostInputPort} from "../port/PostInputPort";
 import {UseCase} from "../../../../shared/application/UseCase";
-import {IPostOutputPort} from "../port/PostOutputPort";
+import {PostOutputPort} from "../port/PostOutputPort";
 import {CreatePostRequest} from "../dto";
 
-export class CreatePostUseCase extends UseCase<CreatePostRequest> implements ICreatePostInputPort {
+export class CreatePostUseCase extends UseCase<CreatePostRequest> implements CreatePostInputPort {
     constructor(
-        readonly outputPort: IPostOutputPort,
-        private readonly postRepository: IPostRepository,
+        readonly outputPort: PostOutputPort,
+        private readonly postRepository: PostRepository,
         private readonly postFactory: PostFactory,
     ) {
         super(outputPort);

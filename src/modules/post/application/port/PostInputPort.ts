@@ -1,7 +1,7 @@
-import {IInputPort} from "../../../../shared/application/InputPort";
+import {InputPort} from "../../../../shared/application/InputPort";
 import {CreatePostRequest, GetAllPostsRequest, GetPostRequest, GetUserPostsRequest} from "../dto";
 
-export interface ICreatePostInputPort extends IInputPort<CreatePostRequest> {}
-export interface IGetPostInputPort extends IInputPort<GetPostRequest> {}
-export interface IGetUserPostsInputPort extends IInputPort<GetUserPostsRequest> {}
-export interface IGetAllPostsInputPort extends IInputPort<GetAllPostsRequest> {}
+export interface CreatePostInputPort extends InputPort<CreatePostRequest> {}
+export interface GetPostInputPort extends InputPort<GetPostRequest> {}
+export interface GetUserPostsInputPort extends InputPort<GetUserPostsRequest> {}
+export interface GetAllPostsInputPort extends InputPort<GetAllPostsRequest> {}

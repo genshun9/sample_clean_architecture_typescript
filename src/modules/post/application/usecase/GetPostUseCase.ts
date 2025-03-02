@@ -1,13 +1,13 @@
-import {IPostRepository} from "../../domain/repository/PostRepository";
+import {PostRepository} from "../../domain/repository/PostRepository";
 import {UseCase} from "../../../../shared/application/UseCase";
 import {convertGetPostRequest2Dto, convertPost2GetPostResponse, GetPostRequest} from "../dto";
-import {IGetPostInputPort} from "../port/PostInputPort";
-import {IPostOutputPort} from "../port/PostOutputPort";
+import {GetPostInputPort} from "../port/PostInputPort";
+import {PostOutputPort} from "../port/PostOutputPort";
 
-export class GetPostUseCase extends UseCase<GetPostRequest> implements IGetPostInputPort {
+export class GetPostUseCase extends UseCase<GetPostRequest> implements GetPostInputPort {
     constructor(
-        readonly outputPort: IPostOutputPort,
-        private readonly postRepository: IPostRepository,
+        readonly outputPort: PostOutputPort,
+        private readonly postRepository: PostRepository,
     ) {
         super(outputPort);
     }

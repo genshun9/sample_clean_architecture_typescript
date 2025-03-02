@@ -1,7 +1,7 @@
 import {User} from "../entity/User";
 import {UserID} from "../valueObject/UserID";
 import {Email} from "../valueObject/Email";
-import {IRepository} from "../../../../shared/domain/Repository";
+import {Repository} from "../../../../shared/domain/Repository";
 import {UserName} from "../valueObject/UserName";
 
 export interface UpdateUserNameParam {
@@ -9,7 +9,7 @@ export interface UpdateUserNameParam {
     name: UserName
 }
 
-export interface IUserRepository extends IRepository<User, UserID, string> {
+export interface UserRepository extends Repository<User, UserID, string> {
     save(user: User): Promise<void>;
     findOneByID(id: UserID): Promise<User | null>;
     findSomeByIDs(ids: UserID[]): Promise<User[]>;

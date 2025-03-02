@@ -1,4 +1,4 @@
-import {IOutputPort} from "../../../../shared/application/OutputPort";
+import {OutputPort} from "../../../../shared/application/OutputPort";
 import {
     CreateUserResponse,
     GetAllUsersResponse,
@@ -6,7 +6,7 @@ import {
     UpdateUserNameResponse
 } from "../dto";
 
-export interface IUserOutputPort extends IOutputPort {
+export interface UserOutputPort extends OutputPort {
     successCreateUser(user: CreateUserResponse): void;
     successGetUser(user: GetUserResponse): void;
     successGetAllUsers(users: GetAllUsersResponse): void;

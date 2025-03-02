@@ -1,7 +1,7 @@
-import {IOutputPort} from "../../../../shared/application/OutputPort";
+import {OutputPort} from "../../../../shared/application/OutputPort";
 import {CreateHashTagResponse, GetAllHashTagsResponse, GetHashTagResponse} from "../dto";
 
-export interface IHashTagOutputPort extends IOutputPort {
+export interface HashTagOutputPort extends OutputPort {
     successCreateHashTag(hashTag: CreateHashTagResponse): void;
     successGetHashTag(hashTag: GetHashTagResponse): void;
     successGetAllHashTags(hashTags: GetAllHashTagsResponse): void;

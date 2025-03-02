@@ -1,8 +1,8 @@
-import {IUserOutputPort} from "../../application/port/UserOutputPort";
+import {UserOutputPort} from "../../application/port/UserOutputPort";
 import {Presenter} from "../../../../shared/adaptor/Presenter";
 import {CreateUserResponse, GetAllUsersResponse, GetUserResponse, UpdateUserNameResponse} from "../../application/dto";
 
-export class UserPresenter extends Presenter implements IUserOutputPort {
+export class UserPresenter extends Presenter implements UserOutputPort {
     successCreateUser(user: CreateUserResponse): void {
         this.response.send(user);
     }

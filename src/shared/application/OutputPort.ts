@@ -1,3 +1,3 @@
-export interface IOutputPort {
+export interface OutputPort {
     failure(error: Error): void;
 }

@@ -1,17 +1,17 @@
-import {IUserRepository} from "../../domain/repository/UserRepository";
-import {IGetUserInputPort} from "../port/UserInputPort";
+import {UserRepository} from "../../domain/repository/UserRepository";
+import {GetUserInputPort} from "../port/UserInputPort";
 import {UseCase} from "../../../../shared/application/UseCase";
-import {IUserOutputPort} from "../port/UserOutputPort";
+import {UserOutputPort} from "../port/UserOutputPort";
 import {
     convertGetUserRequest2Dto,
     convertUser2GetUserResponse,
     GetUserRequest
 } from "../dto";
 
-export class GetUserUseCase extends UseCase<GetUserRequest> implements IGetUserInputPort {
+export class GetUserUseCase extends UseCase<GetUserRequest> implements GetUserInputPort {
     constructor(
-        readonly outputPort: IUserOutputPort,
-        private readonly userRepository: IUserRepository,
+        readonly outputPort: UserOutputPort,
+        private readonly userRepository: UserRepository,
     ) {
         super(outputPort);
     }

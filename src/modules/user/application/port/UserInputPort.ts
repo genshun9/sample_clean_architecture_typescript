@@ -1,4 +1,4 @@
-import {IInputPort} from "../../../../shared/application/InputPort";
+import {InputPort} from "../../../../shared/application/InputPort";
 import {
     CreateUserRequest,
     GetAllUsersRequest,
@@ -6,7 +6,7 @@ import {
     UpdateUserNameRequest,
 } from "../dto";
 
-export interface ICreateUserInputPort extends IInputPort<CreateUserRequest> {}
-export interface IGetUserInputPort extends IInputPort<GetUserRequest> {}
-export interface IGetAllUsersInputPort extends IInputPort<GetAllUsersRequest> {}
-export interface IUpdateUserNameInputPort extends IInputPort<UpdateUserNameRequest> {}
+export interface CreateUserInputPort extends InputPort<CreateUserRequest> {}
+export interface GetUserInputPort extends InputPort<GetUserRequest> {}
+export interface GetAllUsersInputPort extends InputPort<GetAllUsersRequest> {}
+export interface UpdateUserNameInputPort extends InputPort<UpdateUserNameRequest> {}

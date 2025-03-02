@@ -1,3 +1,3 @@
-export interface IInputPort<RequestDto> {
+export interface InputPort<RequestDto> {
     execute(request: RequestDto): Promise<void>;
 }

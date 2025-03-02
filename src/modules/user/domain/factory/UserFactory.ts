@@ -2,9 +2,9 @@ import {User} from "../entity/User";
 import {UserID} from "../valueObject/UserID";
 import {UserName} from "../valueObject/UserName";
 import {Email} from "../valueObject/Email";
-import {IFactory} from "../../../../shared/domain/Factory";
+import {Factory} from "../../../../shared/domain/Factory";
 
-export class UserFactory implements IFactory<User, UserID, string> {
+export class UserFactory implements Factory<User, UserID, string> {
     create(name: string, email: string): User {
         try {
             // ID生成はFactory内で実装

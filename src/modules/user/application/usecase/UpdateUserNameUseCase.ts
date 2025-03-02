@@ -1,15 +1,15 @@
-import {IUserRepository} from "../../domain/repository/UserRepository";
+import {UserRepository} from "../../domain/repository/UserRepository";
 import {UseCase} from "../../../../shared/application/UseCase";
-import {IUserOutputPort} from "../port/UserOutputPort";
+import {UserOutputPort} from "../port/UserOutputPort";
 import {
     convertUpdateUserNameRequest2Dto, convertUser2GetUserResponse, UpdateUserNameRequest
 } from "../dto";
-import {IUpdateUserNameInputPort} from "../port/UserInputPort";
+import {UpdateUserNameInputPort} from "../port/UserInputPort";
 
-export class UpdateUserNameUseCase extends UseCase<UpdateUserNameRequest> implements IUpdateUserNameInputPort {
+export class UpdateUserNameUseCase extends UseCase<UpdateUserNameRequest> implements UpdateUserNameInputPort {
     constructor(
-        readonly outputPort: IUserOutputPort,
-        private readonly userRepository: IUserRepository,
+        readonly outputPort: UserOutputPort,
+        private readonly userRepository: UserRepository,
     ) {
         super(outputPort);
     }

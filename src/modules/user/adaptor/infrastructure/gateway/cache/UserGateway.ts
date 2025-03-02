@@ -1,4 +1,4 @@
-import {IUserRepository} from "../../../../domain/repository/UserRepository";
+import {UserRepository} from "../../../../domain/repository/UserRepository";
 import {User} from "../../../../domain/entity/User";
 import {UserID} from "../../../../domain/valueObject/UserID";
 import {Email} from "../../../../domain/valueObject/Email";
@@ -9,7 +9,7 @@ export interface UpdateUserNameParam {
     userID: UserID,
     name: UserName
 }
-export class UserGateway extends Gateway<User, UserID, string> implements IUserRepository {
+export class UserGateway extends Gateway<User, UserID, string> implements UserRepository {
     // 適当にキャッシュで持たせる
     private readonly cache: User[];
     constructor() {

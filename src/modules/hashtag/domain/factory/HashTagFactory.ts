@@ -1,9 +1,9 @@
-import {IFactory} from "../../../../shared/domain/Factory";
+import {Factory} from "../../../../shared/domain/Factory";
 import {HashTag} from "../entity/HashTag";
 import {HashTagID} from "../valueObject/HashTagID";
 import {Text} from "../valueObject/Text";
 
-export class HashTagFactory implements IFactory<HashTag, HashTagID, string> {
+export class HashTagFactory implements Factory<HashTag, HashTagID, string> {
     create(t: string): HashTag {
         try {
             // ID生成はFactory内で実装

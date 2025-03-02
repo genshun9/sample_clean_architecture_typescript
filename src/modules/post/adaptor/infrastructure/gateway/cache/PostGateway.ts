@@ -1,10 +1,10 @@
-import {IPostRepository} from "../../../../domain/repository/PostRepository";
+import {PostRepository} from "../../../../domain/repository/PostRepository";
 import {Post} from "../../../../domain/entity/Post";
 import {PostID} from "../../../../domain/valueObject/PostID";
 import {Gateway} from "../../../../../../shared/adaptor/Gateway";
 import {UserID} from "../../../../../user/domain/valueObject/UserID";
 
-export class PostGateway extends Gateway<Post, PostID, string> implements IPostRepository {
+export class PostGateway extends Gateway<Post, PostID, string> implements PostRepository {
     // 適当にキャッシュで持たせる
     private cache: Post[];
     constructor() {

@@ -1,13 +1,13 @@
-import {ICreateHashTagInputPort} from "../port/HashTagInputPort";
-import {IHashTagRepository} from "../../domain/repository/HashTagRepository";
+import {CreateHashTagInputPort} from "../port/HashTagInputPort";
+import {HashTagRepository} from "../../domain/repository/HashTagRepository";
 import {HashTagFactory} from "../../domain/factory/HashTagFactory";
 import {CreateHashTagRequest} from "../dto";
-import {IHashTagOutputPort} from "../port/HashTagOutputPort";
+import {HashTagOutputPort} from "../port/HashTagOutputPort";
 
-export class CreateHashTagUseCase implements ICreateHashTagInputPort {
+export class CreateHashTagUseCase implements CreateHashTagInputPort {
     constructor(
-        private readonly outputPort: IHashTagOutputPort,
-        private readonly hashTagRepository: IHashTagRepository,
+        private readonly outputPort: HashTagOutputPort,
+        private readonly hashTagRepository: HashTagRepository,
         private readonly hashTagFactory: HashTagFactory,
     ) {}
 

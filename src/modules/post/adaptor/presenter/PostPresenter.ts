@@ -1,8 +1,8 @@
 import {Presenter} from "../../../../shared/adaptor/Presenter";
-import {IPostOutputPort} from "../../application/port/PostOutputPort";
+import {PostOutputPort} from "../../application/port/PostOutputPort";
 import {CreatePostResponse, GetUserPostsResponse} from "../../application/dto";
 
-export class PostPresenter extends Presenter implements IPostOutputPort {
+export class PostPresenter extends Presenter implements PostOutputPort {
     successCreatePost(post: CreatePostResponse): void {
         this.response.send(post);
     }
