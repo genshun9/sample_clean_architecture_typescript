@@ -5,12 +5,12 @@ import {Message} from "../valueObject/Message";
 import {UserID} from "../../../user/domain/valueObject/UserID";
 
 export class PostFactory implements Factory<Post, PostID, string> {
-    create(m: string, userID: string): Post {
+    create(m: string, userId: string): Post {
         try {
             // ID生成はFactory内で実装
             const postID = PostID.create(crypto.randomUUID());
             const message = new Message(m);
-            const postUserID = new UserID(userID);
+            const postUserID = new UserID(userId);
             const now = new Date();
             return new Post(postID, message, postUserID, now);
         } catch (err) {

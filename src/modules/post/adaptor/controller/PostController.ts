@@ -15,7 +15,7 @@ export const PostController = {
             res.status(400).send("Invalid Request");
             return;
         }
-        const request:CreatePostRequest = ({message, userId});
+        const request:CreatePostRequest = ({message, userId: userId});
         const usecase = new CreatePostUseCase(new PostPresenter(res), new PostGateway(), new PostFactory());
         usecase.execute(request);
     },
@@ -26,7 +26,7 @@ export const PostController = {
             res.status(400).send("Invalid Request");
             return;
         }
-        const request:GetPostRequest = ({postId});
+        const request:GetPostRequest = ({id: postId});
         const usecase = new GetPostUseCase(new PostPresenter(res), new PostGateway());
         usecase.execute(request);
     },

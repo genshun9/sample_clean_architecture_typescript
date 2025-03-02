@@ -11,7 +11,7 @@ export interface CreateUserResponse {
 }
 
 export interface GetUserRequest {
-    userID: string,
+    id: string,
 }
 export interface GetUserResponse {
     user: User;
@@ -23,17 +23,17 @@ export interface GetAllUsersResponse {
 }
 
 export interface UpdateUserNameRequest {
-    userID: string,
+    id: string,
     name: string
 }
 export interface UpdateUserNameResponse {
     user: User;
 }
 
-export const convertGetUserRequest2Dto = (req:GetUserRequest) => UserID.create(req.userID);
+export const convertGetUserRequest2Dto = (req:GetUserRequest) => UserID.create(req.id);
 export const convertUser2GetUserResponse = (user:User) => ({user}) as GetUserResponse;
 export const convertUpdateUserNameRequest2Dto = (req: UpdateUserNameRequest) => ({
-    userID: UserID.create(req.userID),
+    userID: UserID.create(req.id),
     name: new UserName(req.name)
 })
 export const convertUsers2GetAllUsersResponse = (users: User[]) => ({users}) as GetAllUsersResponse

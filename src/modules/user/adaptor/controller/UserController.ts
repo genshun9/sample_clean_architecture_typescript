@@ -27,7 +27,7 @@ export const UserController = {
             res.status(400).send("Invalid Request");
             return;
         }
-        const request: GetUserRequest = ({userID});
+        const request: GetUserRequest = ({id: userID});
         const usecase = new GetUserUseCase(new UserPresenter(res), new UserGateway());
         usecase.execute(request);
     },
@@ -44,7 +44,7 @@ export const UserController = {
             res.status(400).send("Invalid Request");
             return;
         }
-        const request:UpdateUserNameRequest = ({userID, name});
+        const request:UpdateUserNameRequest = ({id: userID, name});
         const usecase = new UpdateUserNameUseCase(new UserPresenter(res), new UserGateway());
         usecase.execute(request);
     }

@@ -11,7 +11,7 @@ export interface CreatePostResponse {
 }
 
 export interface GetPostRequest {
-    postId: string,
+    id: string,
 }
 export interface GetPostResponse {
     post: Post;
@@ -27,10 +27,10 @@ export interface GetUserPostsResponse {
 
 export type GetAllPostsRequest = void;
 export interface GetAllPostsResponse {
-    Posts: Post[];
+    posts: Post[];
 }
 
-export const convertGetPostRequest2Dto = (req:GetPostRequest) => PostID.create(req.postId);
+export const convertGetPostRequest2Dto = (req:GetPostRequest) => PostID.create(req.id);
 export const convertPost2GetPostResponse = (post:Post) => ({post}) as GetPostResponse;
 export const convertGetUserPostsRequest2Dto = (req:GetUserPostsRequest) => UserID.create(req.userId);
 export const convertPosts2GetUserPostsResponse = (posts: Post[]) => ({posts}) as GetUserPostsResponse;
