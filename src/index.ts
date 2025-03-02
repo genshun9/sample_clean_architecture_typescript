@@ -1,6 +1,11 @@
+import "reflect-metadata";
 import express from 'express'
 import * as bodyParser from 'body-parser'
 import router from './router'
+import {initializeApplication} from "./container";
+
+// DIコンテナの初期化
+initializeApplication();
 
 const app = express();
 const PORT:number = 3000;
