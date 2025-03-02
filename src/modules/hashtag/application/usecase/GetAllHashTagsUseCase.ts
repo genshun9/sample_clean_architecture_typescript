@@ -6,22 +6,24 @@ import {
     convertHashTag2GetAllHashTagsResponse,
     GetAllHashTagsRequest,
 } from "../dto";
+import {inject} from "tsyringe";
 
 export class GetAllHashTagsUseCase extends UseCase<GetAllHashTagsRequest> implements GetAllHashTagsInputPort {
     constructor(
-        readonly outputPort: HashTagOutputPort,
-        private readonly hashTagRepository: HashTagRepository,
+        @inject("HashTagRepository") private readonly hashTagRepository: HashTagRepository,
     ) {
-        super(outputPort);
+        super();
     }
 
     async execute(request: GetAllHashTagsRequest): Promise<void> {
         try {
+            // outputPortの設定チェック
+            this.validateOutputPort();
             //Repository経由で取得
             const posts = await this.hashTagRepository.findAll();
-            this.outputPort.successGetAllHashTags(convertHashTag2GetAllHashTagsResponse(posts));
+            (this.outputPort as HashTagOutputPort).successGetAllHashTags(convertHashTag2GetAllHashTagsResponse(posts));
         } catch {
-            this.outputPort.failure(new Error("error"));
+            (this.outputPort as HashTagOutputPort).failure(new Error("error"));
         }
     }
 }
