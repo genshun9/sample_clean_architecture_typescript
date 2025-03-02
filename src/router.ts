@@ -30,6 +30,8 @@ router.get("/hashtags", (req: Request, res: Response) => HashTagController.getAl
 router.post("/post/create", (req: Request, res: Response) => PostController.createPost(req, res));
 router.get("/post/:post_id", (req: Request, res: Response) => PostController.getPost(req, res));
 router.get("/post/user/:user_id", (req: Request, res: Response) => PostController.getUserPosts(req, res));
-
+router.get("/post/favorite/:user_id", (req: Request, res: Response) => PostController.getFavoritePosts(req, res));
+router.put("/post/favorite", (req: Request, res: Response) => PostController.addFavorite(req, res));
+router.put("/post/unfavorite", (req: Request, res: Response) => PostController.removeFavorite(req, res));
 
 export default router;

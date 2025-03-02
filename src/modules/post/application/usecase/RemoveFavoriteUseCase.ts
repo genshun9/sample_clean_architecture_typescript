@@ -21,7 +21,7 @@ export class RemoveFavoriteUseCase extends UseCase<RemoveFavoriteRequest> implem
         try {
             //Repository経由で取得
             const postAggregate = await this.postAggregateRepository.saveFavorite(convertRemoveFavoriteRequest2Dto(request));
-            (this.outputPort as PostOutputPort).successRemoveFavorite(convertPost2RemoveFavoritePostResponse(postAggregate.rootEntity));
+            (this.outputPort as PostOutputPort).successRemoveFavorite(convertPost2RemoveFavoritePostResponse(postAggregate));
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }

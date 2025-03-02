@@ -23,7 +23,7 @@ export class AddFavoriteUseCase extends UseCase<AddFavoriteRequest> implements A
             this.validateOutputPort();
             //Repository経由で取得
             const postAggregate = await this.postAggregateRepository.saveFavorite(convertAddFavoriteRequest2Dto(request));
-            (this.outputPort as PostOutputPort).successAddFavorite(convertPost2AddFavoritePostResponse(postAggregate.rootEntity));
+            (this.outputPort as PostOutputPort).successAddFavorite(convertPost2AddFavoritePostResponse(postAggregate));
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }

@@ -25,7 +25,7 @@ export const HashTagController = {
     },
 
     getHashTag(req:Request, res:Response):void {
-        const postID = req.query.post_id;
+        const postID = req.params.id;
         if (!postID || typeof postID !== "string") {
             res.status(400).send("Invalid Request");
             return;

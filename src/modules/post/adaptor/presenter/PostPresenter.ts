@@ -9,7 +9,7 @@ import {
     GetUserPostsResponse,
     RemoveFavoriteResponse
 } from "../../application/dto";
-import {convertPost2postDto, PostDTO} from "./dto";
+import {convertAggregate2PostDTO, convertPost2postDto, PostDTO} from "./dto";
 
 export class PostPresenter extends Presenter implements PostOutputPort {
     successCreatePost(postResponse: CreatePostResponse): void {
@@ -32,12 +32,12 @@ export class PostPresenter extends Presenter implements PostOutputPort {
     }
 
     successAddFavorite(postResponse: AddFavoriteResponse) {
-        const postDto:PostDTO = convertPost2postDto(postResponse.post);
+        const postDto:PostDTO = convertAggregate2PostDTO(postResponse.postAggregate);
         this.response.send(postDto);
     }
 
     successRemoveFavorite(postResponse: RemoveFavoriteResponse) {
-        const postDto:PostDTO = convertPost2postDto(postResponse.post);
+        const postDto:PostDTO = convertAggregate2PostDTO(postResponse.postAggregate);
         this.response.send(postDto);
     }
 

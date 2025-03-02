@@ -1,6 +1,7 @@
 import {Post} from "../../domain/entity/Post";
 import {PostID} from "../../domain/valueObject/PostID";
 import {UserID} from "../../../user/domain/valueObject/UserID";
+import {PostAggregate} from "../../domain/aggregate/PostAggregate";
 
 export interface CreatePostRequest {
     message: string,
@@ -39,7 +40,7 @@ export interface AddFavoriteRequest {
 }
 
 export interface AddFavoriteResponse {
-    post: Post
+    postAggregate: PostAggregate
 }
 
 export interface RemoveFavoriteRequest {
@@ -48,7 +49,7 @@ export interface RemoveFavoriteRequest {
 }
 
 export interface RemoveFavoriteResponse {
-    post: Post
+    postAggregate: PostAggregate
 }
 
 export interface GetAllPostsRequest {}
@@ -67,9 +68,9 @@ export const convertAddFavoriteRequest2Dto = (req:AddFavoriteRequest) => ({
     postID: PostID.create(req.postId),
     userID: UserID.create(req.userId)
 });
-export const convertPost2AddFavoritePostResponse = (post: Post) => ({post}) as AddFavoriteResponse;
+export const convertPost2AddFavoritePostResponse = (postAggregate: PostAggregate) => ({postAggregate}) as AddFavoriteResponse;
 export const convertRemoveFavoriteRequest2Dto = (req:RemoveFavoriteRequest) => ({
     postID: PostID.create(req.postId),
     userID: UserID.create(req.userId)
 });
-export const convertPost2RemoveFavoritePostResponse = (post: Post) => ({post}) as RemoveFavoriteResponse;
+export const convertPost2RemoveFavoritePostResponse = (postAggregate: PostAggregate) => ({postAggregate}) as RemoveFavoriteResponse;

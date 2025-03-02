@@ -5,7 +5,8 @@ import {
     GetAllPostsRequest,
     GetFavoritePostsResponse,
     GetPostResponse,
-    GetUserPostsResponse, RemoveFavoriteResponse
+    GetUserPostsResponse,
+    RemoveFavoriteResponse
 } from "../dto";
 
 export interface PostOutputPort extends OutputPort {
@@ -13,7 +14,7 @@ export interface PostOutputPort extends OutputPort {
     successGetPost(post: GetPostResponse): void;
     successGetUserPosts(posts: GetUserPostsResponse): void;
     successGetFavoritePosts(posts: GetFavoritePostsResponse): void;
-    successAddFavorite(post: AddFavoriteResponse): void;
-    successRemoveFavorite(post: RemoveFavoriteResponse): void;
+    successAddFavorite(postAggregate: AddFavoriteResponse): void;
+    successRemoveFavorite(postAggregate: RemoveFavoriteResponse): void;
     successGetAllPosts(posts: GetAllPostsRequest): void;
 }

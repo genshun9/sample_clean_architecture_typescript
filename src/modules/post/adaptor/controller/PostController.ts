@@ -36,7 +36,7 @@ export const PostController = {
     },
 
     getPost(req:Request, res:Response):void {
-        const postId = req.query.post_id;
+        const postId = req.params.post_id;
         if (!postId || typeof postId !== "string") {
             res.status(400).send("Invalid Request");
             return;
@@ -53,7 +53,7 @@ export const PostController = {
     },
 
     getUserPosts(req:Request, res:Response):void {
-        const userId = req.query.userId;
+        const userId = req.params.user_id;
         if (!userId || typeof userId !== "string") {
             res.status(400).send("Invalid Request");
             return;
@@ -70,7 +70,7 @@ export const PostController = {
     },
 
     getFavoritePosts(req:Request, res:Response):void {
-        const userId = req.query.userId;
+        const userId = req.params.user_id;
         if (!userId || typeof userId !== "string") {
             res.status(400).send("Invalid Request");
             return;
@@ -87,8 +87,8 @@ export const PostController = {
     },
 
     addFavorite(req:Request, res:Response):void {
-        const userId = req.query.userId;
-        const postId = req.query.postId;
+        const userId = req.body.userId;
+        const postId = req.body.postId;
         if (!userId || typeof userId !== "string" || !postId || typeof postId !== "string") {
             res.status(400).send("Invalid Request");
             return;
@@ -105,8 +105,8 @@ export const PostController = {
     },
 
     removeFavorite(req:Request, res:Response):void {
-        const userId = req.query.userId;
-        const postId = req.query.postId;
+        const userId = req.body.userId;
+        const postId = req.body.postId;
         if (!userId || typeof userId !== "string" || !postId || typeof postId !== "string") {
             res.status(400).send("Invalid Request");
             return;

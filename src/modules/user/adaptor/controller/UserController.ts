@@ -27,7 +27,7 @@ export const UserController = {
     },
 
     getUser(req:Request, res:Response):void {
-        const userID = req.query.id;
+        const userID = req.params.id;
         if (!userID || typeof userID !== "string") {
             res.status(400).send("Invalid Request");
             return;
