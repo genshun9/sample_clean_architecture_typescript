@@ -1,13 +1,13 @@
 import {EntityID} from "./EntityID";
 
-export abstract class Entity<T extends EntityID<U>, U> {
-    protected constructor(protected readonly id: T) {}
+export abstract class Entity<E extends EntityID<V>, V> {
+    protected constructor(protected readonly id: E) {}
 
-    getID(): T {
+    getID(): E {
         return this.id;
     }
 
-    equals(entity: Entity<T, U>): boolean {
+    equals(entity: Entity<E, V>): boolean {
         return this.id.equals(entity.getID());
     }
 }
