@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import {UserRepository} from "../../domain/repository/UserRepository";
 import {GetAllUsersInputPort} from "../port/UserInputPort";
 import {UseCase} from "../../../../shared/application/UseCase";
@@ -7,21 +8,23 @@ import {
     GetAllUsersRequest
 } from "../dto";
 
+@injectable()
 export class GetAllUsersUseCase extends UseCase<GetAllUsersRequest> implements GetAllUsersInputPort {
     constructor(
-        readonly outputPort: UserOutputPort,
-        private readonly userRepository: UserRepository,
+        @inject("UserRepository") private readonly userRepository: UserRepository,
     ) {
-        super(outputPort);
+        super();
     }
 
     async execute(request: GetAllUsersRequest): Promise<void> {
         try {
+            // outputPortの設定チェック
+            this.validateOutputPort();
             // Repository経由で取得
             const users = await this.userRepository.findAll();
-            this.outputPort.successGetAllUsers(convertUsers2GetAllUsersResponse(users));
+            (this.outputPort as UserOutputPort).successGetAllUsers(convertUsers2GetAllUsersResponse(users));
         } catch {
-            this.outputPort.failure(new Error("error"));
+            (this.outputPort as UserOutputPort).failure(new Error("error"));
         }
     }
 }

@@ -35,28 +35,21 @@ export const UserController = {
         const request: GetUserRequest = ({id: userID});
 
         // DIコンテナから依存性を解決しUseCaseを生成
-        const presenter = new UserPresenter(res);
         const usecase = container.resolve(GetUserUseCase);
-
-        // Presenterはインジェクションできないので出力ポートをここで設定
-        Object.defineProperty(usecase, "outputPort", {
-            value: presenter,
-            writable: false
-        });
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new UserPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     },
 
     getAllUsers(req:Request, res:Response):void {
         // DIコンテナから依存性を解決しUseCaseを生成
-        const presenter = new UserPresenter(res);
         const usecase = container.resolve(GetAllUsersUseCase);
-
-        // Presenterはインジェクションできないので出力ポートをここで設定
-        Object.defineProperty(usecase, "outputPort", {
-            value: presenter,
-            writable: false
-        });
-
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new UserPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute({});
     },
 
@@ -70,14 +63,11 @@ export const UserController = {
         const request:UpdateUserNameRequest = ({id: userID, name});
 
         // DIコンテナから依存性を解決しUseCaseを生成
-        const presenter = new UserPresenter(res);
         const usecase = container.resolve(UpdateUserNameUseCase);
-
-        // Presenterはインジェクションできないので出力ポートをここで設定
-        Object.defineProperty(usecase, "outputPort", {
-            value: presenter,
-            writable: false
-        });
+        // 受け取ったrequestオブジェクトをもとに毎回生成する
+        const presenter = new UserPresenter(res);
+        // presenterがシングルトン化できないため、生成済みUseCaseに後から注入する
+        usecase.setOutputPort(presenter);
         usecase.execute(request);
     }
 }
