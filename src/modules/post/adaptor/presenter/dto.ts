@@ -18,9 +18,9 @@ export const convertPost2postDto = (post: Post) => ({
 }) as PostDTO;
 
 export const convertAggregate2PostDTO = (postAggregate:PostAggregate) => ({
-    id: postAggregate.rootEntity.getID().getValue(),
-    message: postAggregate.rootEntity.getMessage().getValue(),
-    userId: postAggregate.rootEntity.getPostedUserID().getValue(),
+    id: postAggregate.getID().getValue(),
+    message: postAggregate.getMessage().getValue(),
+    userId: postAggregate.getPostedUserID().getValue(),
     favorites: postAggregate.getFavoriteCount(),
-    createdAt: postAggregate.rootEntity.getCreatedAt()
+    createdAt: postAggregate.getCreatedAt()
 }) as PostDTO;

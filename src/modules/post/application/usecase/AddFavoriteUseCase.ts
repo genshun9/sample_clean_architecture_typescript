@@ -21,9 +21,17 @@ export class AddFavoriteUseCase extends UseCase<AddFavoriteRequest> implements A
         try {
             // outputPortの設定チェック
             this.validateOutputPort();
-            //Repository経由で取得
-            const postAggregate = await this.postAggregateRepository.saveFavorite(convertAddFavoriteRequest2Dto(request));
-            (this.outputPort as PostOutputPort).successAddFavorite(convertPost2AddFavoritePostResponse(postAggregate));
+            const {postID, userID} = convertAddFavoriteRequest2Dto(request);
+            // Repository経由でAggregate取得
+            const aggregate = await this.postAggregateRepository.findByID(postID);
+            if (aggregate === null) {
+                throw new Error("Post not found");
+            }
+            // ドメインロジック実行
+            const updatedAggregate = aggregate.addFavorite(userID);
+            // 永続化
+            await this.postAggregateRepository.save(updatedAggregate);
+            (this.outputPort as PostOutputPort).successAddFavorite(convertPost2AddFavoritePostResponse(updatedAggregate));
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }

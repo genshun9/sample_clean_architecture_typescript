@@ -6,13 +6,15 @@ import {UserID} from "../../../user/domain/valueObject/UserID";
 import {FavoriteID} from "../../../favorite/domain/valueObject/FavoriteID";
 import {Aggregate} from "../../../../shared/domain/Aggregate";
 
+// 投稿集約 (Post + Favorite[])
+// Aggregateは不変。状態変更メソッドは新しいインスタンスを返す。
 export class PostAggregate extends Aggregate<Post, PostID, string> {
     constructor(
-        readonly id: PostID,
-        readonly rootEntity: Post,
+        id: PostID,
+        private readonly _rootEntity: Post,
         private readonly favorites: Favorite[]
     ) {
-        super(id, rootEntity);
+        super(id, _rootEntity);
     }
 
     getMessage(): Message {
@@ -21,6 +23,10 @@ export class PostAggregate extends Aggregate<Post, PostID, string> {
 
     getPostedUserID(): UserID {
         return this.getRoot().getPostedUserID();
+    }
+
+    getCreatedAt(): Date {
+        return this.getRoot().getCreatedAt();
     }
 
     getFavoriteUserIDs(): UserID[] {

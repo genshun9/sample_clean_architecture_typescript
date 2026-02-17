@@ -5,6 +5,7 @@ import {UseCase} from "../../../../shared/application/UseCase";
 import {PostOutputPort} from "../port/PostOutputPort";
 import {CreatePostRequest} from "../dto";
 import {PostAggregateRepository} from "../../domain/repository/PostAggregateRepository";
+import {PostAggregate} from "../../domain/aggregate/PostAggregate";
 
 @injectable()
 export class CreatePostUseCase extends UseCase<CreatePostRequest> implements CreatePostInputPort {
@@ -21,8 +22,9 @@ export class CreatePostUseCase extends UseCase<CreatePostRequest> implements Cre
             this.validateOutputPort();
             // Factory経由で作成
             const post = this.postFactory.create(request.message, request.userId);
-            // 永続化
-            await this.postAggregateRepository.save(post);
+            // Aggregateとして永続化
+            const aggregate = new PostAggregate(post.getID(), post, []);
+            await this.postAggregateRepository.save(aggregate);
             (this.outputPort as PostOutputPort).successCreatePost({post});
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));

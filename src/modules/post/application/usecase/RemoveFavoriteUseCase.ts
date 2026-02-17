@@ -19,9 +19,19 @@ export class RemoveFavoriteUseCase extends UseCase<RemoveFavoriteRequest> implem
 
     async execute(request: RemoveFavoriteRequest): Promise<void> {
         try {
-            //Repository経由で取得
-            const postAggregate = await this.postAggregateRepository.saveFavorite(convertRemoveFavoriteRequest2Dto(request));
-            (this.outputPort as PostOutputPort).successRemoveFavorite(convertPost2RemoveFavoritePostResponse(postAggregate));
+            // outputPortの設定チェック
+            this.validateOutputPort();
+            const {postID, userID} = convertRemoveFavoriteRequest2Dto(request);
+            // Repository経由でAggregate取得
+            const aggregate = await this.postAggregateRepository.findByID(postID);
+            if (aggregate === null) {
+                throw new Error("Post not found");
+            }
+            // ドメインロジック実行
+            const updatedAggregate = aggregate.removeFavorite(userID);
+            // 永続化
+            await this.postAggregateRepository.save(updatedAggregate);
+            (this.outputPort as PostOutputPort).successRemoveFavorite(convertPost2RemoveFavoritePostResponse(updatedAggregate));
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }

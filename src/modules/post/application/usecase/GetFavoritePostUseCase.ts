@@ -1,7 +1,6 @@
 import {UseCase} from "../../../../shared/application/UseCase";
 import {
     convertGetFavoritePostsRequest2Dto,
-    convertPosts2GetFavoritePostsResponse,
     GetFavoritePostsRequest,
     GetUserPostsRequest
 } from "../dto";
@@ -22,9 +21,11 @@ export class GetFavoritePostsUseCase extends UseCase<GetFavoritePostsRequest> im
         try {
             // outputPortの設定チェック
             this.validateOutputPort();
-            //Repository経由で取得
-            const posts = await this.postAggregateRepository.findFavoritePostsByUserID(convertGetFavoritePostsRequest2Dto(request));
-            (this.outputPort as PostOutputPort).successGetFavoritePosts(convertPosts2GetFavoritePostsResponse(posts));
+            // Repository経由で取得
+            const aggregates = await this.postAggregateRepository.findFavoritePostsByUserID(convertGetFavoritePostsRequest2Dto(request));
+            // Postエンティティの配列を返却するため、各AggregateからPostを取得
+            const posts = aggregates.map(a => (a as any).getRoot());
+            (this.outputPort as PostOutputPort).successGetFavoritePosts({posts});
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }
