@@ -1,7 +1,7 @@
 import {Entity} from "../../../../shared/domain/Entity";
 import {FavoriteID} from "../valueObject/FavoriteID";
 import {UserID} from "../../../user/domain/valueObject/UserID";
-import {PostID} from "../../../post/domain/valueObject/PostID";
+import {PostID} from "../valueObject/PostID";
 
 export class Favorite extends Entity<FavoriteID, string> {
     constructor(

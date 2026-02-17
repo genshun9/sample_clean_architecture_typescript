@@ -1,9 +1,9 @@
 import {Post} from "../entity/Post";
 import {PostID} from "../valueObject/PostID";
-import {Favorite} from "../../../favorite/domain/entity/Favorite";
+import {Favorite} from "../entity/Favorite";
 import {Message} from "../valueObject/Message";
 import {UserID} from "../../../user/domain/valueObject/UserID";
-import {FavoriteID} from "../../../favorite/domain/valueObject/FavoriteID";
+import {FavoriteID} from "../valueObject/FavoriteID";
 import {Aggregate} from "../../../../shared/domain/Aggregate";
 
 // 投稿集約 (Post + Favorite[])
