@@ -6,10 +6,10 @@ import {Entity} from "../../../../shared/domain/Entity";
 export class User extends Entity<UserID, string> {
     constructor(
         readonly id: UserID,
-        private name: UserName,
+        private readonly name: UserName,
         private readonly email: Email,
         private readonly createdAt: Date,
-        private updatedAt: Date
+        private readonly updatedAt: Date
     ) {
         super(id);
     }
@@ -33,10 +33,8 @@ export class User extends Entity<UserID, string> {
         return this.updatedAt
     }
 
-    // 自身を返却
+    // 名前を変更した新しいインスタンスを返す
     updateName(newName: UserName): User {
-        this.name = newName;
-        this.updatedAt = new Date();
-        return this;
+        return new User(this.id, newName, this.email, this.createdAt, new Date());
     }
 }

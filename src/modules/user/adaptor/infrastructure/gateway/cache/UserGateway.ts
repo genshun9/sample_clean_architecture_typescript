@@ -3,22 +3,23 @@ import {User} from "../../../../domain/entity/User";
 import {UserID} from "../../../../domain/valueObject/UserID";
 import {Email} from "../../../../domain/valueObject/Email";
 import {Gateway} from "../../../../../../shared/adaptor/Gateway";
-import {UserName} from "../../../../domain/valueObject/UserName";
 
-export interface UpdateUserNameParam {
-    userID: UserID,
-    name: UserName
-}
 export class UserGateway extends Gateway<User, UserID, string> implements UserRepository {
     // 適当にキャッシュで持たせる
-    private readonly cache: User[];
+    private cache: User[];
     constructor() {
         super();
         this.cache = []; //初期化
     }
 
     async save(user: User): Promise<void> {
-        this.cache.push(user);
+        // 既存ユーザーの場合は更新、新規の場合は追加
+        const index = this.cache.findIndex(u => u.getID().equals(user.getID()));
+        if (index >= 0) {
+            this.cache[index] = user;
+        } else {
+            this.cache.push(user);
+        }
     }
 
     async findOneByID(id: UserID): Promise<User | null> {
@@ -44,16 +45,5 @@ export class UserGateway extends Gateway<User, UserID, string> implements UserRe
         } else {
             return user;
         }
-    }
-
-    async updateUserName(param: UpdateUserNameParam): Promise<User> {
-        const user = this.cache.find(u => u.getID().equals(param.userID));
-        if (user === undefined) {
-            throw new Error("user not found");
-        } else {
-            const updateUser = user.updateName(param.name);
-            return updateUser;
-        }
-
     }
 }

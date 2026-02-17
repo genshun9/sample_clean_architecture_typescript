@@ -19,9 +19,17 @@ export class UpdateUserNameUseCase extends UseCase<UpdateUserNameRequest> implem
         try {
             // outputPortの設定チェック
             this.validateOutputPort();
-            // Repository経由で更新
-            const updateUser = await this.userRepository.updateUserName(convertUpdateUserNameRequest2Dto(request));
-            (this.outputPort as UserOutputPort).successUpdateUserName(convertUser2GetUserResponse(updateUser));
+            // Repository経由でUser取得
+            const dto = convertUpdateUserNameRequest2Dto(request);
+            const user = await this.userRepository.findOneByID(dto.userID);
+            if (user === null) {
+                throw new Error("User not found");
+            }
+            // ドメインロジック実行
+            const updatedUser = user.updateName(dto.name);
+            // 永続化
+            await this.userRepository.save(updatedUser);
+            (this.outputPort as UserOutputPort).successUpdateUserName(convertUser2GetUserResponse(updatedUser));
         } catch {
             (this.outputPort as UserOutputPort).failure(new Error("error"));
         }
