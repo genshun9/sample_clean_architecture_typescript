@@ -33,12 +33,13 @@ export abstract class Aggregate<E extends Entity<ID, V>, ID extends EntityID<V>,
 }
 
 // 互換性持たせない場合、Aggregate専用のRepositoryの型を作るしかない
+// 永続化の単位はAggregate
 export interface AggregateRepository<
     A extends Aggregate<E, ID, V>,
     E extends Entity<ID, V>,
     ID extends EntityID<V>,
     V> {
-    save(entity: E): Promise<void>;
-    findOneByID(id: ID): Promise<E | null>;
+    save(aggregate: A): Promise<void>;
+    findByID(id: ID): Promise<A | null>;
     findAll(): Promise<A[]>;
 }
