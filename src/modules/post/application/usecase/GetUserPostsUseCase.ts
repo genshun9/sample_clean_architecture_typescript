@@ -19,9 +19,7 @@ export class GetUserPostsUseCase extends UseCase<GetUserPostsRequest> implements
             this.validateOutputPort();
             // Repository経由で取得
             const aggregates = await this.postAggregateRepository.findByUserID(convertGetUserPostsRequest2Dto(request));
-            // Postエンティティの配列を返却するため、各AggregateからPostを取得
-            const posts = aggregates.map(a => (a as any).getRoot());
-            (this.outputPort as PostOutputPort).successGetUserPosts({posts});
+            (this.outputPort as PostOutputPort).successGetUserPosts({postAggregates: aggregates});
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }

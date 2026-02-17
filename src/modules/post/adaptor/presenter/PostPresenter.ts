@@ -9,25 +9,25 @@ import {
     GetUserPostsResponse,
     RemoveFavoriteResponse
 } from "../../application/dto";
-import {convertAggregate2PostDTO, convertPost2postDto, PostDTO} from "./dto";
+import {convertAggregate2PostDTO, PostDTO} from "./dto";
 
 export class PostPresenter extends Presenter implements PostOutputPort {
     successCreatePost(postResponse: CreatePostResponse): void {
-        const postDto:PostDTO = convertPost2postDto(postResponse.post);
+        const postDto:PostDTO = convertAggregate2PostDTO(postResponse.postAggregate);
         this.response.send(postDto);
     }
     successGetPost(postResponse: GetPostResponse): void {
-        const postDto:PostDTO = convertPost2postDto(postResponse.post);
+        const postDto:PostDTO = convertAggregate2PostDTO(postResponse.postAggregate);
         this.response.send(postDto);
     }
 
     successGetUserPosts(postResponse: GetUserPostsResponse) {
-        const postDtos:PostDTO[] = postResponse.posts.map(p => convertPost2postDto(p));
+        const postDtos:PostDTO[] = postResponse.postAggregates.map(a => convertAggregate2PostDTO(a));
         this.response.send(postDtos);
     }
 
     successGetFavoritePosts(postResponse: GetFavoritePostsResponse) {
-        const postDtos:PostDTO[] = postResponse.posts.map(p => convertPost2postDto(p));
+        const postDtos:PostDTO[] = postResponse.postAggregates.map(a => convertAggregate2PostDTO(a));
         this.response.send(postDtos);
     }
 
@@ -42,7 +42,7 @@ export class PostPresenter extends Presenter implements PostOutputPort {
     }
 
     successGetAllPosts(postResponse: GetAllPostsResponse): void {
-        const postDtos:PostDTO[] = postResponse.posts.map(p => convertPost2postDto(p));
+        const postDtos:PostDTO[] = postResponse.postAggregates.map(a => convertAggregate2PostDTO(a));
         this.response.send(postDtos);
     }
 }

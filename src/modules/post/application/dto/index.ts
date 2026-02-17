@@ -1,4 +1,3 @@
-import {Post} from "../../domain/entity/Post";
 import {PostID} from "../../domain/valueObject/PostID";
 import {UserID} from "../../../user/domain/valueObject/UserID";
 import {PostAggregate} from "../../domain/aggregate/PostAggregate";
@@ -8,14 +7,14 @@ export interface CreatePostRequest {
     userId: string
 }
 export interface CreatePostResponse {
-    post: Post;
+    postAggregate: PostAggregate;
 }
 
 export interface GetPostRequest {
     id: string,
 }
 export interface GetPostResponse {
-    post: Post;
+    postAggregate: PostAggregate;
 }
 
 export interface GetUserPostsRequest {
@@ -23,7 +22,7 @@ export interface GetUserPostsRequest {
 }
 
 export interface GetUserPostsResponse {
-    posts: Post[];
+    postAggregates: PostAggregate[];
 }
 
 export interface GetFavoritePostsRequest {
@@ -31,7 +30,7 @@ export interface GetFavoritePostsRequest {
 }
 
 export interface GetFavoritePostsResponse {
-    posts: Post[];
+    postAggregates: PostAggregate[];
 }
 
 export interface AddFavoriteRequest {
@@ -54,15 +53,15 @@ export interface RemoveFavoriteResponse {
 
 export interface GetAllPostsRequest {}
 export interface GetAllPostsResponse {
-    posts: Post[];
+    postAggregates: PostAggregate[];
 }
 
 export const convertGetPostRequest2Dto = (req:GetPostRequest) => PostID.create(req.id);
-export const convertPost2GetPostResponse = (post:Post) => ({post}) as GetPostResponse;
+export const convertPostAggregate2GetPostResponse = (postAggregate:PostAggregate) => ({postAggregate}) as GetPostResponse;
 export const convertGetUserPostsRequest2Dto = (req:GetUserPostsRequest) => UserID.create(req.userId);
-export const convertPosts2GetUserPostsResponse = (posts: Post[]) => ({posts}) as GetUserPostsResponse;
+export const convertPostAggregates2GetUserPostsResponse = (postAggregates: PostAggregate[]) => ({postAggregates}) as GetUserPostsResponse;
 export const convertGetFavoritePostsRequest2Dto = (req:GetFavoritePostsRequest) => UserID.create(req.userId);
-export const convertPosts2GetFavoritePostsResponse = (posts: Post[]) => ({posts}) as GetFavoritePostsResponse;
+export const convertPostAggregates2GetFavoritePostsResponse = (postAggregates: PostAggregate[]) => ({postAggregates}) as GetFavoritePostsResponse;
 
 export const convertAddFavoriteRequest2Dto = (req:AddFavoriteRequest) => ({
     postID: PostID.create(req.postId),

@@ -22,9 +22,7 @@ export class GetPostUseCase extends UseCase<GetPostRequest> implements GetPostIn
             if (aggregate === null) {
                 throw new Error("NO POST");
             }
-            // Postエンティティを使ってResponseを作成するため、プライベートなrootEntityを取得
-            const post = (aggregate as any).getRoot();
-            (this.outputPort as PostOutputPort).successGetPost({post});
+            (this.outputPort as PostOutputPort).successGetPost({postAggregate: aggregate});
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }

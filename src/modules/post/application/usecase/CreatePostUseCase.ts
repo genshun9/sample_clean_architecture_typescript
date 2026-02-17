@@ -25,7 +25,7 @@ export class CreatePostUseCase extends UseCase<CreatePostRequest> implements Cre
             // Aggregateとして永続化
             const aggregate = new PostAggregate(post.getID(), post, []);
             await this.postAggregateRepository.save(aggregate);
-            (this.outputPort as PostOutputPort).successCreatePost({post});
+            (this.outputPort as PostOutputPort).successCreatePost({postAggregate: aggregate});
         } catch {
             (this.outputPort as PostOutputPort).failure(new Error("error"));
         }
